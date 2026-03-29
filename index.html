@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kallpa Greenz — Agrotecnología para el Futuro</title>
+  <meta name="description" content="Empresa social agro-tecnológica peruana. Mercado de agrotecnología, proyectos de impacto y financiamiento para agricultores." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #3a7d1e;
+      --green-mid:   #569b32;
+      --green-light: #83c346;
+      --accent:      #f7d86a;
+      --dark:        #1a2e1a;
+      --body-txt:    #3d5c3a;
+      --light-bg:    #f5f9f2;
+      --gray-border: #dde8d8;
+      --white:       #ffffff;
+      --font: 'Raleway', system-ui, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(26,46,26,.07);
+      --shadow-md: 0 8px 28px rgba(26,46,26,.11);
+      --shadow-lg: 0 20px 60px rgba(26,46,26,.16);
+      --radius: 14px;
+      --radius-lg: 22px;
+      --tr: .25s ease;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font); color: var(--dark); background: var(--white); line-height: 1.65; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── UTILS ── */
+    .container  { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section    { padding: 100px 0; }
+    .section-sm { padding: 64px 0; }
+    .bg-light   { background: var(--light-bg); }
+
+    .label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--green-mid); background: rgba(86,155,50,.1);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 14px;
+    }
+    h2.title {
+      font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; line-height: 1.15;
+      color: var(--dark); margin-bottom: 14px;
+    }
+    p.subtitle {
+      font-size: 1.05rem; font-weight: 500; color: var(--body-txt);
+      max-width: 560px; line-height: 1.75;
+    }
+    .hdr { margin-bottom: 60px; }
+    .hdr.center { text-align: center; }
+    .hdr.center p.subtitle { margin: 0 auto; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 100px;
+      font-size: .92rem; font-weight: 700; transition: var(--tr); white-space: nowrap;
+    }
+    .btn-primary   { background: var(--green-mid); color: var(--white); }
+    .btn-primary:hover { background: var(--green); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(86,155,50,.32); }
+    .btn-outline   { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.55); }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+    .btn-ghost     { background: transparent; color: var(--green-mid); border: 2px solid var(--green-mid); }
+    .btn-ghost:hover { background: var(--green-mid); color: var(--white); }
+    .btn-dark      { background: var(--dark); color: var(--white); }
+    .btn-dark:hover { background: #2a4a2a; transform: translateY(-2px); }
+    .btn-accent    { background: var(--accent); color: var(--dark); }
+    .btn-accent:hover { background: #e6c84e; transform: translateY(-2px); }
+
+    /* Fade-up */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 18px 0; transition: background var(--tr), padding var(--tr), box-shadow var(--tr);
+    }
+    #navbar.scrolled { background: var(--white); padding: 12px 0; box-shadow: var(--shadow-sm); }
+
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.25rem; font-weight: 800; color: var(--white); transition: color var(--tr); flex-shrink: 0;
+    }
+    #navbar.scrolled .nav-logo { color: var(--dark); }
+    .nav-logo svg { width: 38px; height: 38px; flex-shrink: 0; }
+
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      padding: 7px 13px; border-radius: 8px;
+      font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.85); transition: var(--tr);
+    }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.12); }
+    #navbar.scrolled .nav-links a { color: var(--body-txt); }
+    #navbar.scrolled .nav-links a:hover { color: var(--green-mid); background: var(--light-bg); }
+
+    .nav-cta {
+      padding: 10px 22px !important; border-radius: 100px !important;
+      background: var(--green-mid) !important; color: var(--white) !important; font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--green) !important; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(86,155,50,.3); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; border-radius: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--tr); }
+    #navbar.scrolled .hamburger span { background: var(--dark); }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; background: var(--white); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 1.3rem; font-weight: 700; color: var(--dark); padding: 12px 28px; border-radius: 12px; width: 260px; text-align: center; transition: var(--tr); }
+    .mobile-menu a:hover { background: var(--light-bg); color: var(--green-mid); }
+    .mobile-menu .btn-primary { margin-top: 14px; width: 260px; justify-content: center; }
+    .mobile-close { position: absolute; top: 20px; right: 24px; font-size: 1.5rem; padding: 8px; color: var(--dark); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #inicio {
+      min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&auto=format&fit=crop&q=80');
+      background-size: cover; background-position: center; filter: brightness(.45);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,46,26,.9) 0%, rgba(58,125,30,.45) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 760px; padding: 150px 0 210px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(247,216,106,.18); border: 1px solid rgba(247,216,106,.38);
+      color: var(--accent); padding: 7px 18px; border-radius: 100px;
+      font-size: .82rem; font-weight: 700; letter-spacing: .07em; margin-bottom: 26px;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.1;
+      color: var(--white); margin-bottom: 22px;
+    }
+    .hero-title span { color: var(--green-light); }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 500;
+      color: rgba(255,255,255,.78); line-height: 1.8; max-width: 580px; margin-bottom: 40px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+
+    .hero-metrics {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,.06); backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,.1); z-index: 1;
+    }
+    .hero-metrics-inner {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .metric { padding: 28px 20px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+    .metric:last-child { border-right: none; }
+    .metric-value { font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+    .metric-label { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.68); }
+
+    /* ════════════════════════════════
+       QUÉ HACEMOS
+    ════════════════════════════════ */
+    #proceso { background: var(--light-bg); }
+
+    .process-grid {
+      display: grid; grid-template-columns: repeat(5,1fr); gap: 0; position: relative;
+    }
+    .process-grid::before {
+      content: ''; position: absolute; top: 40px; left: calc(10%); right: calc(10%);
+      height: 2px; background: linear-gradient(90deg, var(--gray-border), var(--green-light), var(--gray-border));
+    }
+    .process-step {
+      position: relative; z-index: 1; display: flex; flex-direction: column;
+      align-items: center; text-align: center; padding: 0 10px;
+    }
+    .step-icon {
+      width: 80px; height: 80px; border-radius: 50%; background: var(--white);
+      border: 2px solid var(--gray-border); display: flex; align-items: center;
+      justify-content: center; font-size: 1.8rem; margin-bottom: 18px;
+      transition: var(--tr); box-shadow: var(--shadow-sm);
+    }
+    .process-step:hover .step-icon { background: var(--green-mid); border-color: var(--green-mid); transform: scale(1.08); box-shadow: 0 8px 24px rgba(86,155,50,.28); }
+    .step-num { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 8px; }
+    .step-title { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+    .step-desc { font-size: .85rem; font-weight: 500; color: var(--body-txt); line-height: 1.65; }
+
+    /* ════════════════════════════════
+       MERCADO AGROTECNOLÓGICO
+    ════════════════════════════════ */
+    #mercado { background: var(--white); }
+
+    .market-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px;
+      border-bottom: 2px solid var(--gray-border); padding-bottom: 0;
+    }
+    .tab-btn {
+      padding: 12px 22px; border-radius: 10px 10px 0 0; font-size: .9rem; font-weight: 700;
+      color: var(--body-txt); background: transparent; border: 2px solid transparent;
+      border-bottom: none; cursor: pointer; transition: var(--tr); margin-bottom: -2px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .tab-btn:hover { color: var(--green-mid); background: var(--light-bg); }
+    .tab-btn.active {
+      color: var(--green-mid); background: var(--white);
+      border-color: var(--gray-border) var(--gray-border) var(--white) var(--gray-border);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Product grid */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .product-card {
+      background: var(--white); border: 1.5px solid var(--gray-border);
+      border-radius: var(--radius-lg); overflow: hidden; transition: var(--tr);
+      display: flex; flex-direction: column;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--green-light); }
+
+    .card-img { position: relative; height: 190px; overflow: hidden; background: var(--light-bg); }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .product-card:hover .card-img img { transform: scale(1.04); }
+    .card-img-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; background: var(--light-bg);
+    }
+
+    .card-tag {
+      position: absolute; top: 14px; left: 14px;
+      padding: 4px 12px; border-radius: 100px; font-size: .72rem; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase; box-shadow: var(--shadow-sm);
+    }
+    .tag-basic     { background: var(--white); color: var(--green-mid); }
+    .tag-popular   { background: var(--green-mid); color: var(--white); }
+    .tag-rec       { background: var(--accent); color: #6a5200; }
+    .tag-premium   { background: var(--dark); color: var(--white); }
+    .tag-gothic    { background: #4a3a6a; color: var(--white); }
+    .tag-modular   { background: #2d7a8a; color: var(--white); }
+    .tag-eco       { background: #5a9a4a; color: var(--white); }
+
+    .card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+    .card-series { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 4px; }
+    .card-title { font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+    .card-tagline { font-size: .84rem; font-weight: 600; color: var(--body-txt); margin-bottom: 14px; font-style: italic; }
+    .card-feats { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .card-feat {
+      display: flex; align-items: flex-start; gap: 7px;
+      font-size: .84rem; font-weight: 500; color: var(--body-txt);
+    }
+    .card-feat::before { content: '✓'; color: var(--green-mid); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+
+    .card-specs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .spec-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--light-bg); border: 1px solid var(--gray-border);
+      padding: 3px 10px; border-radius: 100px; font-size: .74rem; font-weight: 600; color: var(--body-txt);
+    }
+
+    .card-footer {
+      margin-top: auto; padding-top: 18px; border-top: 1px solid var(--gray-border);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+    .card-price-label { font-size: .76rem; font-weight: 600; color: #7a9478; margin-bottom: 2px; }
+    .card-price-val { font-size: 1.05rem; font-weight: 800; color: var(--dark); }
+
+    /* ════════════════════════════════
+       PROYECTOS
+    ════════════════════════════════ */
+    #proyectos { background: var(--light-bg); }
+
+    .projects-list { display: flex; flex-direction: column; gap: 40px; }
+
+    .project-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1.5px solid var(--gray-border); overflow: hidden;
+      display: grid; grid-template-columns: 1fr 2fr; transition: var(--tr);
+    }
+    .project-card:hover { box-shadow: var(--shadow-lg); border-color: var(--green-light); }
+
+    .project-visual {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+      padding: 40px 32px; display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 280px;
+    }
+    .project-icon { font-size: 3.5rem; margin-bottom: 16px; }
+    .project-num { font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 8px; }
+    .project-name { font-size: 1.5rem; font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 8px; }
+    .project-status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      color: var(--white); padding: 5px 14px; border-radius: 100px;
+      font-size: .76rem; font-weight: 700;
+    }
+
+    .project-content { padding: 36px 40px; }
+    .project-desc { font-size: .95rem; font-weight: 500; color: var(--body-txt); line-height: 1.8; margin-bottom: 28px; }
+
+    .impact-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .impact-item { background: var(--light-bg); border-radius: 10px; padding: 14px 16px; }
+    .impact-val { font-size: 1.3rem; font-weight: 800; color: var(--green-mid); line-height: 1; margin-bottom: 4px; }
+    .impact-desc { font-size: .78rem; font-weight: 500; color: var(--body-txt); }
+
+    /* ════════════════════════════════
+       AGROCAPITAL (CTA)
+    ════════════════════════════════ */
+    #agrocapital {
+      background: var(--dark); padding: 100px 0;
+    }
+    .agrocap-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .agrocap-label { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); background: rgba(247,216,106,.15); padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+    .agrocap-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 20px; }
+    .agrocap-title span { color: var(--accent); }
+    .agrocap-desc { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,.72); line-height: 1.8; margin-bottom: 32px; }
+    .agrocap-feats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .agrocap-feat { display: flex; align-items: center; gap: 12px; font-size: .92rem; font-weight: 600; color: rgba(255,255,255,.82); }
+    .agrocap-feat-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(247,216,106,.12); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .agrocap-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .agrocap-visual {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg); padding: 36px; position: relative; overflow: hidden;
+    }
+    .agrocap-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .agrocap-stat { padding: 20px; background: rgba(255,255,255,.05); border-radius: 12px; }
+    .agrocap-stat-val { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+    .agrocap-stat-label { font-size: .8rem; font-weight: 500; color: rgba(255,255,255,.6); }
+    .agrocap-logo-tag {
+      margin-top: 24px; padding: 16px 20px; background: rgba(247,216,106,.08);
+      border: 1px solid rgba(247,216,106,.2); border-radius: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .agrocap-logo-tag-icon { font-size: 1.6rem; }
+    .agrocap-logo-tag-text { font-size: .88rem; font-weight: 700; color: var(--accent); }
+    .agrocap-logo-tag-sub { font-size: .76rem; font-weight: 500; color: rgba(255,255,255,.55); }
+
+    /* ════════════════════════════════
+       EQUIPO
+    ════════════════════════════════ */
+    #equipo { background: var(--white); }
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .team-card {
+      background: var(--light-bg); border-radius: var(--radius-lg); padding: 32px 24px;
+      text-align: center; border: 1.5px solid var(--gray-border); transition: var(--tr);
+    }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--green-light); }
+    .team-avatar {
+      width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+      margin: 0 auto 18px; border: 3px solid var(--white); box-shadow: var(--shadow-sm);
+    }
+    .team-name { font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+    .team-role { font-size: .84rem; font-weight: 600; color: var(--green-mid); margin-bottom: 12px; }
+    .team-bio  { font-size: .84rem; font-weight: 500; color: var(--body-txt); line-height: 1.7; }
+
+    /* ════════════════════════════════
+       CONTACTO
+    ════════════════════════════════ */
+    #contacto { background: var(--light-bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+    .contact-info-card { background: var(--white); border-radius: var(--radius-lg); padding: 36px; border: 1.5px solid var(--gray-border); }
+    .contact-info-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--gray-border); }
+    .contact-info-item:last-child { border-bottom: none; }
+    .contact-info-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--light-bg); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-info-label { font-size: .76rem; font-weight: 700; color: var(--green-mid); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+    .contact-info-val { font-size: .92rem; font-weight: 600; color: var(--dark); }
+
+    .form-group { margin-bottom: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+    .form-label { display: block; font-size: .82rem; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
+    .form-control {
+      width: 100%; padding: 12px 16px; border-radius: 10px; font-size: .92rem; font-family: var(--font);
+      font-weight: 500; border: 1.5px solid var(--gray-border); background: var(--white);
+      color: var(--dark); transition: var(--tr);
+    }
+    .form-control:focus { outline: none; border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(86,155,50,.12); }
+    .form-control.error { border-color: #e05050; }
+    .form-error { font-size: .78rem; font-weight: 600; color: #e05050; margin-top: 4px; display: none; }
+    .form-error.visible { display: block; }
+    select.form-control { cursor: pointer; }
+    textarea.form-control { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%; justify-content: center; padding: 15px 28px; font-size: 1rem;
+      position: relative;
+    }
+    .btn-submit.loading::after {
+      content: ''; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4); border-top-color: var(--white);
+      border-radius: 50%; animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+    .success-msg {
+      display: none; text-align: center; padding: 40px 20px;
+      background: rgba(86,155,50,.06); border-radius: var(--radius-lg);
+      border: 1.5px solid rgba(86,155,50,.2);
+    }
+    .success-msg.visible { display: block; }
+    .success-msg h3 { font-size: 1.4rem; font-weight: 800; color: var(--green-mid); margin-bottom: 10px; }
+    .success-msg p { font-size: .95rem; font-weight: 500; color: var(--body-txt); }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer { background: var(--dark); color: rgba(255,255,255,.65); padding: 64px 0 32px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; color: var(--white); margin-bottom: 14px; }
+    .footer-logo svg { width: 32px; height: 32px; }
+    .footer-brand p { font-size: .88rem; font-weight: 500; line-height: 1.75; max-width: 280px; margin-bottom: 20px; }
+    .social-links { display: flex; gap: 10px; }
+    .social-link {
+      width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.06);
+      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55);
+      transition: var(--tr);
+    }
+    .social-link:hover { background: var(--green-mid); color: var(--white); }
+    .footer-col h4 { font-size: .88rem; font-weight: 800; color: var(--white); margin-bottom: 16px; letter-spacing: .06em; text-transform: uppercase; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a { font-size: .86rem; font-weight: 500; transition: var(--tr); }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 12px; }
+    .footer-bottom p { font-size: .83rem; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: .83rem; font-weight: 500; transition: var(--tr); }
+    .footer-legal a:hover { color: var(--white); }
+
+    /* WhatsApp float */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25); transition: var(--tr);
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(37,211,102,.4); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(2,1fr); }
+      .team-grid { grid-template-columns: repeat(2,1fr); }
+      .agrocap-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-wrap { display: none; }
+      .hamburger { display: flex; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-grid::before { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-visual { min-height: 200px; }
+      .impact-grid { grid-template-columns: repeat(2,1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .hero-metrics-inner { grid-template-columns: repeat(2,1fr); }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .agrocap-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .hero-metrics-inner { grid-template-columns: repeat(2,1fr); }
+      .market-tabs { gap: 4px; }
+      .tab-btn { padding: 9px 14px; font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav id="navbar" aria-label="Navegación principal">
+  <div class="container">
+    <div class="nav-inner">
+
+      <a href="#inicio" class="nav-logo" aria-label="Kallpa Greenz — Inicio">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20 36 C10 36 4 28 4 20 C4 10 12 4 20 4 C28 4 36 10 36 20" stroke="#569b32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M20 30 C14 30 10 26 10 20 C10 14 14 10 20 10 C26 10 30 14 30 20" stroke="#65bfb2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M20 24 C18 24 16 22.2 16 20 C16 17.8 17.8 16 20 16 C22.2 16 24 17.8 24 20" stroke="#83c346" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <line x1="20" y1="36" x2="20" y2="20" stroke="#569b32" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 28 C20 28 16 24 14 22 C14 22 18 22 20 24" fill="#83c346"/>
+          <path d="M20 25 C20 25 24 21 26 20 C26 20 22 20 20 22" fill="#83c346"/>
+        </svg>
+        Kallpa Greenz
+      </a>
+
+      <div class="nav-links" role="navigation">
+        <a href="#inicio">Inicio</a>
+        <a href="#proceso">Qué Hacemos</a>
+        <a href="#mercado">Mercado</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="nav-cta-wrap">
+        <a href="https://agrocapital2.vercel.app/" target="_blank" rel="noopener" class="nav-links a nav-cta btn btn-primary" style="font-size:.88rem;">
+          💰 AgroCapital
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación">
+  <button class="mobile-close" id="mobileClose" aria-label="Cerrar menú">✕</button>
+  <a href="#inicio"    onclick="closeMobile()">Inicio</a>
+  <a href="#proceso"   onclick="closeMobile()">Qué Hacemos</a>
+  <a href="#mercado"   onclick="closeMobile()">Mercado</a>
+  <a href="#proyectos" onclick="closeMobile()">Proyectos</a>
+  <a href="#equipo"    onclick="closeMobile()">Equipo</a>
+  <a href="#contacto"  onclick="closeMobile()">Contacto</a>
+  <a href="https://agrocapital2.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeMobile()">💰 AgroCapital</a>
+</div>
+
+
+<!-- ════════ HERO ════════ -->
+<section id="inicio" aria-label="Inicio">
+  <div class="hero-bg" role="img" aria-label="Invernadero agrotecnológico"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">🌱 Empresa Social Agro-Tecnológica · Perú</div>
+      <h1 class="hero-title">
+        Tecnología<br>
+        que hace crecer<br>
+        <span>al campo peruano.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Mercado de agrotecnología, proyectos de impacto y financiamiento inteligente
+        para transformar la agricultura en el Perú.
+      </p>
+      <div class="hero-cta">
+        <a href="#mercado" class="btn btn-primary">Explorar Mercado</a>
+        <a href="#proyectos" class="btn btn-outline">Ver Proyectos</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-metrics" aria-label="Métricas de impacto">
+    <div class="hero-metrics-inner">
+      <div class="metric">
+        <div class="metric-value" data-target="2600" data-prefix="+">0</div>
+        <div class="metric-label">Niños beneficiados</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value" data-target="90" data-prefix="" data-suffix="%">0</div>
+        <div class="metric-label">Ahorro de agua en cultivos</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value" data-target="10" data-prefix="+">0</div>
+        <div class="metric-label">Escuelas y espacios impactados</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value" data-target="7" data-prefix="+">0</div>
+        <div class="metric-label">Toneladas CO₂ capturadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ QUÉ HACEMOS ════════ -->
+<section id="proceso" class="section bg-light" aria-label="Qué hacemos">
+  <div class="container">
+    <div class="hdr center fade-up">
+      <span class="label">🔄 Nuestro proceso</span>
+      <h2 class="title">¿Cómo trabajamos?</h2>
+      <p class="subtitle">Una cadena de valor completa que conecta tecnología, campo y mercado.</p>
+    </div>
+
+    <div class="process-grid fade-up">
+      <div class="process-step">
+        <div class="step-icon">🔍</div>
+        <div class="step-num">Paso 01</div>
+        <div class="step-title">Diagnóstico</div>
+        <p class="step-desc">Evaluamos tu terreno, suelo y condiciones climáticas para recomendar la solución ideal.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🏗️</div>
+        <div class="step-num">Paso 02</div>
+        <div class="step-title">Instalación</div>
+        <p class="step-desc">Instalamos el sistema de invernadero e hidropónico con tecnología de primer nivel.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🌱</div>
+        <div class="step-num">Paso 03</div>
+        <div class="step-title">Producción</div>
+        <p class="step-desc">Acompañamos tu ciclo productivo con asesoría técnica y monitoreo continuo.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">💰</div>
+        <div class="step-num">Paso 04</div>
+        <div class="step-title">Financiamiento</div>
+        <p class="step-desc">Conectamos tu proyecto con inversores a través de AgroCapital para escalar.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">🏪</div>
+        <div class="step-num">Paso 05</div>
+        <div class="step-title">Mercado</div>
+        <p class="step-desc">Accede a mercados de alto valor: exportación, supermercados y compradores directos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ MERCADO AGROTECNOLÓGICO ════════ -->
+<section id="mercado" class="section" aria-label="Mercado de agrotecnología">
+  <div class="container">
+
+    <div class="hdr fade-up">
+      <span class="label">🛒 Agrotecnología</span>
+      <h2 class="title">Mercado Agrotecnológico</h2>
+      <p class="subtitle">Todo lo que necesitas para modernizar tu producción, en un solo lugar.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="market-tabs" role="tablist" aria-label="Categorías del mercado">
+      <button class="tab-btn active" onclick="switchTab('invernaderos')" role="tab" aria-selected="true">🏗️ Invernaderos</button>
+      <button class="tab-btn" onclick="switchTab('insumos')" role="tab" aria-selected="false">📦 Insumos</button>
+      <button class="tab-btn" onclick="switchTab('riego')" role="tab" aria-selected="false">💧 Riego</button>
+      <button class="tab-btn" onclick="switchTab('semillas')" role="tab" aria-selected="false">🌱 Semillas</button>
+      <button class="tab-btn" onclick="switchTab('fertilizantes')" role="tab" aria-selected="false">🧪 Fertilizantes</button>
+    </div>
+
+    <!-- ══ TAB: INVERNADEROS ══ -->
+    <div id="tab-invernaderos" class="tab-panel active">
+      <div class="products-grid">
+
+        <!-- Macrotúnel BASIC -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏗️</div>
+            <span class="card-tag tag-basic">Entrada</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Macrotúnel</div>
+            <h3 class="card-title">BASIC</h3>
+            <p class="card-tagline">La solución más elemental</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 6–9 m</span>
+              <span class="spec-pill">📏 Largo variable</span>
+              <span class="spec-pill">↕ H. 1.5–3 m</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Estructura acero laminado DX 51-D galvanizado</li>
+              <li class="card-feat">Revestimiento zinc 275 g/m² (ambas caras)</li>
+              <li class="card-feat">Componentes: patas, arcos, estacas y puntales</li>
+              <li class="card-feat">Totalmente desmontable — fácil reubicación</li>
+              <li class="card-feat">Compatible con cultivo hidropónico</li>
+              <li class="card-feat">Ideal para berries y árboles frutales</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Macrotúnel BASIC')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macrotúnel FORTE -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏗️</div>
+            <span class="card-tag tag-popular">Popular</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Macrotúnel</div>
+            <h3 class="card-title">FORTE</h3>
+            <p class="card-tagline">Eficiencia y versatilidad</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 6–9 m</span>
+              <span class="spec-pill">↕ H. 1.5–3 m</span>
+              <span class="spec-pill">⚙ DX 51-D</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Estructura reforzada para mayor resistencia al viento</li>
+              <li class="card-feat">Mejor climatología adversa sin perder estabilidad</li>
+              <li class="card-feat">Zinc 275 g/m² (ambas caras)</li>
+              <li class="card-feat">Totalmente desmontable y reubicable</li>
+              <li class="card-feat">Compatible con sistema hidropónico</li>
+              <li class="card-feat">Especial para producción de berries a gran escala</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Macrotúnel FORTE')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macrotúnel PLUS -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏗️</div>
+            <span class="card-tag tag-rec">Recomendado</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Macrotúnel</div>
+            <h3 class="card-title">PLUS</h3>
+            <p class="card-tagline">La mejor relación calidad-precio</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 6–9 m</span>
+              <span class="spec-pill">↕ H. 1.5–3 m</span>
+              <span class="spec-pill">🌿 Gama media</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Malla mosquitera fija + plástico tricapa 800 galgas</li>
+              <li class="card-feat">Cruces de San Andrés y correa de arriostamiento</li>
+              <li class="card-feat">Canales de evacuación y ventilaciones integradas</li>
+              <li class="card-feat">Tubo arco ø35/40/50 × 1.50 mm; pata × 2.00 mm</li>
+              <li class="card-feat">Ideal para cultivo de pitaya según productores</li>
+              <li class="card-feat">Compatible con sistema hidropónico PATA-CLIC</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-accent" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Macrotúnel PLUS')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macrotúnel PREMIUM -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏗️</div>
+            <span class="card-tag tag-premium">Premium</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Macrotúnel</div>
+            <h3 class="card-title">PREMIUM</h3>
+            <p class="card-tagline">La excelencia en macrotúnel</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 7–9 m</span>
+              <span class="spec-pill">↕ H. 0.75–1.5 m</span>
+              <span class="spec-pill">⭐ Gama alta</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Malla mosquitera + plástico tricapa 800 galgas</li>
+              <li class="card-feat">Refuerzos: cruces San Andrés, arriostamiento, correas frontales</li>
+              <li class="card-feat">Tubo arco ø40-50 × 1.50 mm; pata ø40-50 × 2.00 mm</li>
+              <li class="card-feat">Reducción 30% agua y 50% fertilizantes vs. cultivo tradicional</li>
+              <li class="card-feat">30% más plantas por hectárea — mayor rentabilidad</li>
+              <li class="card-feat">Compatible con hidroponía, frutos de mejor calidad</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-dark" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Macrotúnel PREMIUM')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macrotúnel GÓTICO -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">⛪</div>
+            <span class="card-tag tag-gothic">Gótico</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Macrotúnel</div>
+            <h3 class="card-title">GÓTICO</h3>
+            <p class="card-tagline">Mayor volumen, condensación casi nula</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 7–9 m</span>
+              <span class="spec-pill">↕ H. 0.75–1.5 m</span>
+              <span class="spec-pill">🌡 Gama media</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Arco gótico: mayor volumen de aire interior</li>
+              <li class="card-feat">Inclinación pronunciada — condensación casi nula</li>
+              <li class="card-feat">Malla mosquitera + tricapa 800 galgas en laterales</li>
+              <li class="card-feat">Refuerzos San Andrés, arriostamiento y canales</li>
+              <li class="card-feat">Tubo arco ø40 × 1.50 mm; pata ø40 × 2.00 mm</li>
+              <li class="card-feat">Compatible con cultivo hidropónico</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Macrotúnel GÓTICO')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multitúnel Estándar -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏭</div>
+            <span class="card-tag tag-modular">Modular</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Multitúnel</div>
+            <h3 class="card-title">ESTÁNDAR</h3>
+            <p class="card-tagline">El resultado de décadas de experiencia</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 6–10 m</span>
+              <span class="spec-pill">↕ Canal 3–5 m</span>
+              <span class="spec-pill">🔩 DX 51-D</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Invernadero modular totalmente estanco — solo tornillería</li>
+              <li class="card-feat">Ventilación lateral, frontal y cenital (manual o automática)</li>
+              <li class="card-feat">Para hortalizas, ornamentales, viveros y semilleros</li>
+              <li class="card-feat">Opcional: pantalla térmica, nebulización, cooling, calefacción</li>
+              <li class="card-feat">Puertas correderas, superficie variable</li>
+              <li class="card-feat">Diseñado para sistemas automatizados de precisión</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Multitúnel Estándar')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multitúnel Gótico -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">⛪</div>
+            <span class="card-tag tag-gothic">Multitúnel</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Multitúnel</div>
+            <h3 class="card-title">GÓTICO</h3>
+            <p class="card-tagline">Mayor volumen interior, temperatura ideal</p>
+            <div class="card-specs">
+              <span class="spec-pill">📐 Ancho 6–10 m</span>
+              <span class="spec-pill">🌡 Clima óptimo</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">Arco gótico que incrementa volumen de aire interior</li>
+              <li class="card-feat">Temperatura y humedad más uniforme</li>
+              <li class="card-feat">Ventilaciones cenitales de 1/4 arcos simples o dobles</li>
+              <li class="card-feat">Totalmente compatible con equipos del multitúnel estándar</li>
+              <li class="card-feat">Acero galvanizado DX 51-D, alta durabilidad</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Multitúnel Gótico')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multitúnel Almacén -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🏪</div>
+            <span class="card-tag tag-modular">Almacén</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Multitúnel</div>
+            <h3 class="card-title">ALMACÉN</h3>
+            <p class="card-tagline">Un sinfín de posibilidades</p>
+            <div class="card-specs">
+              <span class="spec-pill">💪 Máx. robustez</span>
+              <span class="spec-pill">📐 Gran anchura</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">La variante más robusta y consistente de toda la gama</li>
+              <li class="card-feat">Mayor anchura y mayor altura disponibles</li>
+              <li class="card-feat">Cubierta: policarbonato o panel sándwich</li>
+              <li class="card-feat">Uso dual: cultivo + almacenamiento</li>
+              <li class="card-feat">Ideal para agroindustria y logística de campo</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Inversión estimada</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-dark" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Multitúnel Almacén')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sistema Hidropónico PATA-CLIC -->
+        <div class="product-card fade-up">
+          <div class="card-img">
+            <div class="card-img-placeholder">🍓</div>
+            <span class="card-tag tag-eco">Hidroponía</span>
+          </div>
+          <div class="card-body">
+            <div class="card-series">Sistema Hidropónico</div>
+            <h3 class="card-title">PATA-CLIC</h3>
+            <p class="card-tagline">Agricultura sostenible patentada</p>
+            <div class="card-specs">
+              <span class="spec-pill">🏅 Patente N° 200602450/7</span>
+              <span class="spec-pill">🌊 -90% agua</span>
+            </div>
+            <ul class="card-feats">
+              <li class="card-feat">3 variantes: PATACLIC, en V (doble canal) y en W (capacidad ×2)</li>
+              <li class="card-feat">Pata auto-roscante + canaleta galvanizada sin tornillería</li>
+              <li class="card-feat">Saco de cultivo de fibra de coco incluido</li>
+              <li class="card-feat">Acorta ciclos de cultivo — mayor rendimiento</li>
+              <li class="card-feat">Requiere menos superficie para la misma producción</li>
+              <li class="card-feat">Fertiriego preciso integrado al sistema</li>
+            </ul>
+            <div class="card-footer">
+              <div>
+                <div class="card-price-label">Sistema completo</div>
+                <div class="card-price-val">Cotizar</div>
+              </div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Sistema Hidropónico PATA-CLIC')">Solicitar info</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-invernaderos -->
+
+    <!-- ══ TAB: INSUMOS ══ -->
+    <div id="tab-insumos" class="tab-panel">
+      <div class="products-grid">
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🎞️</div><span class="card-tag tag-popular">Bestseller</span></div>
+          <div class="card-body">
+            <div class="card-series">Coberturas</div>
+            <h3 class="card-title">Film Tricapa UV</h3>
+            <p class="card-tagline">200 micras — protección total de tu inversión</p>
+            <ul class="card-feats">
+              <li class="card-feat">Plástico tricapa 800 galgas, ancho 8 m, largo 100 m</li>
+              <li class="card-feat">Filtro UV integrado — vida útil 4–5 años</li>
+              <li class="card-feat">Alta transmisión lumínica (≥90%)</li>
+              <li class="card-feat">Compatible con todos los modelos de macrotúnel</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Precio por rollo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Film Tricapa UV')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🕸️</div><span class="card-tag tag-basic">Control de plagas</span></div>
+          <div class="card-body">
+            <div class="card-series">Mallas</div>
+            <h3 class="card-title">Malla Anti-Insecto 50 Mesh</h3>
+            <p class="card-tagline">Barrera física contra pulgones, mosca blanca y trips</p>
+            <ul class="card-feats">
+              <li class="card-feat">50 hilos por cm² — bloquea insectos vectores de virus</li>
+              <li class="card-feat">Polietileno HDPE con tratamiento UV</li>
+              <li class="card-feat">Rollo 100 m × 2 m, blanca o negra</li>
+              <li class="card-feat">Sin impacto en ventilación natural del invernadero</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Precio por rollo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Malla Anti-Insecto 50 Mesh')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🌿</div><span class="card-tag tag-eco">Sombra</span></div>
+          <div class="card-body">
+            <div class="card-series">Mallas</div>
+            <h3 class="card-title">Malla Raschel 50%</h3>
+            <p class="card-tagline">Reducción solar ideal para cultivos sensibles</p>
+            <ul class="card-feats">
+              <li class="card-feat">Disponible en 30%, 50% y 70% de sombra</li>
+              <li class="card-feat">HDPE virgen con aditivos UV — durable</li>
+              <li class="card-feat">Rollo 10 m × 50 m, verde o negra</li>
+              <li class="card-feat">Reduce temperatura interior hasta 8°C</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Precio por rollo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Malla Raschel Sombra')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-insumos -->
+
+    <!-- ══ TAB: RIEGO ══ -->
+    <div id="tab-riego" class="tab-panel">
+      <div class="products-grid">
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">💧</div><span class="card-tag tag-rec">Completo</span></div>
+          <div class="card-body">
+            <div class="card-series">Riego por Goteo</div>
+            <h3 class="card-title">Kit Goteo 1,000 m²</h3>
+            <p class="card-tagline">Todo incluido para empezar a irrigar</p>
+            <ul class="card-feats">
+              <li class="card-feat">Cabezal de filtración arena + malla 130 mesh</li>
+              <li class="card-feat">1,000 m de cinta de goteo 16 mm (goteros cada 20 cm)</li>
+              <li class="card-feat">Tuberías de distribución PE y conectores</li>
+              <li class="card-feat">Inyector venturi para fertirriego incluido</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Kit completo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Kit Goteo 1000m²')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🌫️</div><span class="card-tag tag-modular">Microclima</span></div>
+          <div class="card-body">
+            <div class="card-series">Nebulización</div>
+            <h3 class="card-title">Sistema Nebulizador</h3>
+            <p class="card-tagline">Control de temperatura y humedad en el invernadero</p>
+            <ul class="card-feats">
+              <li class="card-feat">Boquillas antidrop ø0.3 mm — niebla ultra-fina</li>
+              <li class="card-feat">Bomba de alta presión 70 bar incluida</li>
+              <li class="card-feat">Reduce temperatura hasta 12°C en verano</li>
+              <li class="card-feat">Kit para 500 m² con 50 boquillas</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Sistema completo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Sistema Nebulizador')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">⚙️</div><span class="card-tag tag-basic">Cabezal</span></div>
+          <div class="card-body">
+            <div class="card-series">Filtración</div>
+            <h3 class="card-title">Cabezal de Riego Profesional</h3>
+            <p class="card-tagline">Protege tu sistema y optimiza el fertirriego</p>
+            <ul class="card-feats">
+              <li class="card-feat">Filtro de arena 3" + filtro de malla 2" en paralelo</li>
+              <li class="card-feat">Manómetros de entrada y salida</li>
+              <li class="card-feat">Venturi 1" para inyección de fertilizantes</li>
+              <li class="card-feat">Válvula reguladora de presión 1–4 bar</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Cabezal completo</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Cabezal de Riego Profesional')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-riego -->
+
+    <!-- ══ TAB: SEMILLAS ══ -->
+    <div id="tab-semillas" class="tab-panel">
+      <div class="products-grid">
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🍅</div><span class="card-tag tag-popular">Alta demanda</span></div>
+          <div class="card-body">
+            <div class="card-series">Semillas Hortícolas</div>
+            <h3 class="card-title">Tomate Cherry Sweet 100</h3>
+            <p class="card-tagline">Variedad de exportación, sabor excepcional</p>
+            <ul class="card-feats">
+              <li class="card-feat">500 semillas por sobre — germinación &gt;92%</li>
+              <li class="card-feat">Planta indeterminada de alto rendimiento</li>
+              <li class="card-feat">Fruto 15–20 g, brix &gt;8 — perfil exportación</li>
+              <li class="card-feat">Resistente a fusarium y TSWV</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Por sobre</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Semillas Tomate Cherry Sweet 100')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🥬</div><span class="card-tag tag-eco">Hidroponía</span></div>
+          <div class="card-body">
+            <div class="card-series">Semillas Hortícolas</div>
+            <h3 class="card-title">Lechuga Batavia Green</h3>
+            <p class="card-tagline">Ideal para sistema NFT y canales hidropónicos</p>
+            <ul class="card-feats">
+              <li class="card-feat">1,000 semillas por sobre — germinación &gt;95%</li>
+              <li class="card-feat">Ciclo corto 35–40 días en sistema hidropónico</li>
+              <li class="card-feat">Resistente a bolting en altas temperaturas</li>
+              <li class="card-feat">Peso promedio cosecha: 250–300 g/planta</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Por sobre</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Semillas Lechuga Batavia Green')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🫑</div><span class="card-tag tag-rec">Premium</span></div>
+          <div class="card-body">
+            <div class="card-series">Semillas Hortícolas</div>
+            <h3 class="card-title">Pimiento California Wonder</h3>
+            <p class="card-tagline">Bloque grueso, color intenso — mercado top</p>
+            <ul class="card-feats">
+              <li class="card-feat">250 semillas — germinación &gt;90%</li>
+              <li class="card-feat">Fruto 4 lóbulos, pared gruesa &gt;8 mm</li>
+              <li class="card-feat">Alto rendimiento: 3–4 kg/planta por ciclo</li>
+              <li class="card-feat">Resistente a Phytophthora y Xanthomonas</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Por sobre</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Semillas Pimiento California Wonder')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-semillas -->
+
+    <!-- ══ TAB: FERTILIZANTES ══ -->
+    <div id="tab-fertilizantes" class="tab-panel">
+      <div class="products-grid">
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🧪</div><span class="card-tag tag-eco">Hidroponía</span></div>
+          <div class="card-body">
+            <div class="card-series">Nutrición Vegetal</div>
+            <h3 class="card-title">Solución Nutritiva A+B</h3>
+            <p class="card-tagline">Fórmula completa para hidroponía de precisión</p>
+            <ul class="card-feats">
+              <li class="card-feat">Bidon A (macroelementos) + Bidon B (microelementos) 10L c/u</li>
+              <li class="card-feat">Dilución 1:200 — rinde 4,000 L de solución</li>
+              <li class="card-feat">pH estabilizado 5.5–6.5 para absorción óptima</li>
+              <li class="card-feat">Formulado para lechuga, tomate, pepino y fresas</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Kit A+B</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-primary" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Solución Nutritiva Hidropónica A+B')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">🌊</div><span class="card-tag tag-rec">Bio</span></div>
+          <div class="card-body">
+            <div class="card-series">Biofertilizantes</div>
+            <h3 class="card-title">Biofertilizante de Algas</h3>
+            <p class="card-tagline">Rico en citoquininas, auxinas y aminoácidos naturales</p>
+            <ul class="card-feats">
+              <li class="card-feat">Extracto concentrado de algas pardas (Ascophyllum nodosum)</li>
+              <li class="card-feat">Presentación 5 L — dilución foliar 2–3 mL/L</li>
+              <li class="card-feat">Mejora cuajado de frutos y resistencia al estrés</li>
+              <li class="card-feat">100% orgánico, apto para agricultura ecológica</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Por bidon 5L</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('Biofertilizante de Algas')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card fade-up">
+          <div class="card-img"><div class="card-img-placeholder">⚗️</div><span class="card-tag tag-basic">Estándar</span></div>
+          <div class="card-body">
+            <div class="card-series">Nutrición Vegetal</div>
+            <h3 class="card-title">NPK 20-20-20 Soluble</h3>
+            <p class="card-tagline">Fertilizante equilibrado de arranque y mantenimiento</p>
+            <ul class="card-feats">
+              <li class="card-feat">Fórmula 20-20-20 + microelementos quelados</li>
+              <li class="card-feat">Saco 25 kg — dilución 1–3 g/L en fertirriego</li>
+              <li class="card-feat">Alta solubilidad — no obstruye goteros</li>
+              <li class="card-feat">Compatible con toda el agua de riego del Perú</li>
+            </ul>
+            <div class="card-footer">
+              <div><div class="card-price-label">Por saco 25 kg</div><div class="card-price-val">Cotizar</div></div>
+              <a href="#contacto" class="btn btn-ghost" style="padding:9px 18px;font-size:.84rem;" onclick="setConsulta('NPK 20-20-20 Soluble')">Pedir cotización</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-fertilizantes -->
+
+  </div>
+</section>
+
+
+<!-- ════════ PROYECTOS ════════ -->
+<section id="proyectos" class="section bg-light" aria-label="Proyectos de impacto">
+  <div class="container">
+
+    <div class="hdr center fade-up">
+      <span class="label">📍 Impacto real</span>
+      <h2 class="title">Nuestros Proyectos</h2>
+      <p class="subtitle">Iniciativas que transforman comunidades, generan productividad y cuidan el planeta.</p>
+    </div>
+
+    <div class="projects-list">
+
+      <!-- DOMOS PARA EDUCAR -->
+      <div class="project-card fade-up">
+        <div class="project-visual">
+          <div>
+            <div class="project-icon">🌿</div>
+            <div class="project-num">Proyecto 01</div>
+            <div class="project-name">Domos para Educar</div>
+          </div>
+          <div class="project-status-badge">🟢 En curso — expandiendo a Amazonía</div>
+        </div>
+        <div class="project-content">
+          <p class="project-desc">Desde 2021, Kallpa Greenz promueve la construcción de domos educativos sostenibles en escuelas públicas vulnerables del Perú. Estos espacios son aulas vivas donde niños y jóvenes aprenden hidroponía, energía limpia y cuidado ambiental de forma práctica, empoderándonos como agentes de cambio.</p>
+          <div class="impact-grid">
+            <div class="impact-item">
+              <div class="impact-val">+2,600</div>
+              <div class="impact-desc">Niños beneficiados en Lima Norte, Centro y Sur</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">90%</div>
+              <div class="impact-desc">Ahorro de agua vs. agricultura tradicional</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">+7 ton</div>
+              <div class="impact-desc">CO₂ capturado entre 2021–2024</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">+10</div>
+              <div class="impact-desc">Escuelas y espacios públicos impactados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAOS -->
+      <div class="project-card fade-up">
+        <div class="project-visual" style="background:linear-gradient(135deg,#1a5a6a 0%,#2d9a8a 100%);">
+          <div>
+            <div class="project-icon">🔬</div>
+            <div class="project-num">Proyecto 02</div>
+            <div class="project-name">NAOS: Algas que Purifican tu Mundo</div>
+          </div>
+          <div class="project-status-badge">🔵 MVP desarrollado — en optimización</div>
+        </div>
+        <div class="project-content">
+          <p class="project-desc">NAOS desarrolla fotobiorreactores compactos que usan microalgas para capturar CO₂, purificar el aire y generar biofertilizante líquido. Instalables en oficinas, aulas o viviendas urbanas, son una solución versátil para contaminación atmosférica y mejora de suelos agrícolas.</p>
+          <div class="impact-grid">
+            <div class="impact-item">
+              <div class="impact-val">0.5 t</div>
+              <div class="impact-desc">CO₂ capturado por unidad al año</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">100%</div>
+              <div class="impact-desc">Del contenido algal convertible a biofertilizante líquido</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">&lt;12 W</div>
+              <div class="impact-desc">Consumo eléctrico por unidad con LED eficiente</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">&gt;85%</div>
+              <div class="impact-desc">Reutilización interna de agua en ciclo cerrado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REIGEL -->
+      <div class="project-card fade-up">
+        <div class="project-visual" style="background:linear-gradient(135deg,#4a3a1a 0%,#8a6a30 100%);">
+          <div>
+            <div class="project-icon">🤖</div>
+            <div class="project-num">Proyecto 03</div>
+            <div class="project-name">REIGEL: Modernización Agrícola</div>
+          </div>
+          <div class="project-status-badge">🟢 Última instalación en Caraz, Áncash</div>
+        </div>
+        <div class="project-content">
+          <p class="project-desc">REIGEL transforma la producción agrícola tradicional mediante tecnología verde y automatizada. Ofrece soluciones llave en mano para el sector agroindustrial: infraestructura moderna, sistemas hidropónicos y software de automatización inteligente con alto retorno de inversión.</p>
+          <div class="impact-grid">
+            <div class="impact-item">
+              <div class="impact-val">4,000</div>
+              <div class="impact-desc">Lechugas cada 5 meses con tecnología DWC</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">90%</div>
+              <div class="impact-desc">Menos consumo de agua vs. cultivo tradicional</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">12–14 m</div>
+              <div class="impact-desc">Meses para retorno de inversión proyectado</div>
+            </div>
+            <div class="impact-item">
+              <div class="impact-val">25 años</div>
+              <div class="impact-desc">Vida útil proyectada de la infraestructura</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ AGROCAPITAL ════════ -->
+<section id="agrocapital" aria-label="AgroCapital — Inversión en agricultura rentable">
+  <div class="container">
+    <div class="agrocap-inner">
+
+      <div>
+        <div class="agrocap-label">💰 Spinoff de Kallpa Greenz</div>
+        <h2 class="agrocap-title">Conectamos inversores con<br><span>agricultura rentable.</span></h2>
+        <p class="agrocap-desc">AgroCapital es nuestra plataforma de inversión que vincula capital privado con proyectos agrícolas modernos, tecnificados y de alto rendimiento en el Perú. Retornos reales, impacto medible.</p>
+        <div class="agrocap-feats">
+          <div class="agrocap-feat">
+            <div class="agrocap-feat-icon">📈</div>
+            Proyectos verificados con retorno de inversión 12–14 meses
+          </div>
+          <div class="agrocap-feat">
+            <div class="agrocap-feat-icon">🌿</div>
+            Tecnología hidropónica y automatización validada en campo
+          </div>
+          <div class="agrocap-feat">
+            <div class="agrocap-feat-icon">🔍</div>
+            Transparencia total — métricas de impacto en tiempo real
+          </div>
+          <div class="agrocap-feat">
+            <div class="agrocap-feat-icon">🤝</div>
+            Acompañamiento técnico durante todo el ciclo productivo
+          </div>
+        </div>
+        <div class="agrocap-cta">
+          <a href="https://agrocapital2.vercel.app/" target="_blank" rel="noopener" class="btn btn-accent">Conocer AgroCapital →</a>
+          <a href="#contacto" class="btn btn-outline">Hablar con un asesor</a>
+        </div>
+      </div>
+
+      <div class="agrocap-visual">
+        <div class="agrocap-stats">
+          <div class="agrocap-stat">
+            <div class="agrocap-stat-val">12–14</div>
+            <div class="agrocap-stat-label">meses promedio ROI</div>
+          </div>
+          <div class="agrocap-stat">
+            <div class="agrocap-stat-val">90%</div>
+            <div class="agrocap-stat-label">ahorro de agua</div>
+          </div>
+          <div class="agrocap-stat">
+            <div class="agrocap-stat-val">25 años</div>
+            <div class="agrocap-stat-label">vida útil infraestructura</div>
+          </div>
+          <div class="agrocap-stat">
+            <div class="agrocap-stat-val">3.2 t</div>
+            <div class="agrocap-stat-label">CO₂ evitadas/año por proyecto</div>
+          </div>
+        </div>
+        <div class="agrocap-logo-tag">
+          <div class="agrocap-logo-tag-icon">🌾</div>
+          <div>
+            <div class="agrocap-logo-tag-text">AgroCapital</div>
+            <div class="agrocap-logo-tag-sub">Un spinoff de Kallpa Greenz Leaders</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ EQUIPO ════════ -->
+<section id="equipo" class="section" aria-label="Nuestro equipo">
+  <div class="container">
+
+    <div class="hdr center fade-up">
+      <span class="label">👥 Las personas detrás</span>
+      <h2 class="title">Nuestro Equipo</h2>
+      <p class="subtitle">Un equipo multidisciplinario comprometido con transformar el agro peruano.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card fade-up">
+        <div class="team-avatar">🌱</div>
+        <div class="team-name">Valentina Torres</div>
+        <div class="team-role">CEO & Co-fundadora</div>
+        <p class="team-bio">Ingeniera agrónoma con especialización en agrotecnología sostenible. Lidera la visión estratégica de Kallpa Greenz desde su fundación en 2021.</p>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-avatar">🔬</div>
+        <div class="team-name">Diego Quispe</div>
+        <div class="team-role">CTO — Jefe de Tecnología</div>
+        <p class="team-bio">Ingeniero en sistemas con maestría en IoT agrícola. Diseña y desarrolla los sistemas de automatización y software de monitoreo de REIGEL.</p>
+      </div>
+      <div class="team-card fade-up">
+        <div class="team-avatar">💧</div>
+        <div class="team-name">Ana Flores</div>
+        <div class="team-role">Directora de Proyectos</div>
+        <p class="team-bio">Especialista en hidroponía y educación STEAM. Coordina el proyecto Domos para Educar en más de 10 escuelas del Perú.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ CONTACTO ════════ -->
+<section id="contacto" class="section bg-light" aria-label="Contacto">
+  <div class="container">
+
+    <div class="hdr fade-up">
+      <span class="label">✉️ Escríbenos</span>
+      <h2 class="title">Hablemos de tu proyecto</h2>
+      <p class="subtitle">¿Agricultor, inversor o aliado? Cuéntanos. Respondemos en menos de 24 horas.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div>
+        <div class="contact-info-card fade-up">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-val">contacto@kallpagreenz.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📱</div>
+            <div>
+              <div class="contact-info-label">WhatsApp</div>
+              <div class="contact-info-val">+51 999 999 999</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <div class="contact-info-label">Sede</div>
+              <div class="contact-info-val">Lima, Perú</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🌐</div>
+            <div>
+              <div class="contact-info-label">AgroCapital</div>
+              <div class="contact-info-val"><a href="https://agrocapital2.vercel.app/" target="_blank" rel="noopener" style="color:var(--green-mid);font-weight:700;">agrocapital2.vercel.app</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="nombre">Nombre completo *</label>
+              <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ej. Juan Quispe" required />
+              <div class="form-error" id="nombreError">Por favor ingresa tu nombre.</div>
+            </div>
+            <div>
+              <label class="form-label" for="tipoConsulta">Tipo de consulta</label>
+              <select class="form-control" id="tipoConsulta" name="tipoConsulta">
+                <option value="">Seleccionar...</option>
+                <option value="agricultor">Soy agricultor / productor</option>
+                <option value="inversor">Quiero invertir</option>
+                <option value="invernadero">Cotizar invernadero</option>
+                <option value="proyecto">Proyecto educativo</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="whatsapp">WhatsApp *</label>
+              <input class="form-control" type="tel" id="whatsapp" name="whatsapp" placeholder="+51 999 999 999" required />
+              <div class="form-error" id="whatsappError">Ingresa un número válido.</div>
+            </div>
+            <div>
+              <label class="form-label" for="email">Email *</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="tu@email.com" required />
+              <div class="form-error" id="emailError">Ingresa un email válido.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="mensaje">Tu consulta</label>
+            <textarea class="form-control" id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu terreno, cultivo de interés o cualquier duda..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">Enviar mensaje</button>
+        </form>
+        <div class="success-msg" id="successMsg">
+          <h3>✅ ¡Mensaje enviado!</h3>
+          <p>Nos pondremos en contacto contigo en menos de 24 horas. ¡Gracias por confiar en Kallpa Greenz!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 36 C10 36 4 28 4 20 C4 10 12 4 20 4 C28 4 36 10 36 20" stroke="#569b32" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M20 30 C14 30 10 26 10 20 C10 14 14 10 20 10 C26 10 30 14 30 20" stroke="#65bfb2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M20 24 C18 24 16 22.2 16 20 C16 17.8 17.8 16 20 16 C22.2 16 24 17.8 24 20" stroke="#83c346" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <line x1="20" y1="36" x2="20" y2="20" stroke="#569b32" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 28 C20 28 16 24 14 22 C14 22 18 22 20 24" fill="#83c346"/>
+            <path d="M20 25 C20 25 24 21 26 20 C26 20 22 20 20 22" fill="#83c346"/>
+          </svg>
+          Kallpa Greenz
+        </div>
+        <p>Empresa social agro-tecnológica peruana. Transformamos el campo con tecnología, educación e inversión inteligente.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#proceso">Qué Hacemos</a></li>
+          <li><a href="#mercado">Mercado</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#equipo">Equipo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Invernaderos</h4>
+        <ul>
+          <li><a href="#mercado">Macrotúnel BASIC</a></li>
+          <li><a href="#mercado">Macrotúnel FORTE</a></li>
+          <li><a href="#mercado">Macrotúnel PLUS</a></li>
+          <li><a href="#mercado">Macrotúnel PREMIUM</a></li>
+          <li><a href="#mercado">Multitúnel</a></li>
+          <li><a href="#mercado">Sistema Hidropónico</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="mailto:contacto@kallpagreenz.com">contacto@kallpagreenz.com</a></li>
+          <li><a href="tel:+51999999999">+51 999 999 999</a></li>
+          <li><a href="https://agrocapital2.vercel.app/" target="_blank" rel="noopener">AgroCapital</a></li>
+          <li><a href="#contacto">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Kallpa Greenz Leaders S.A. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- WhatsApp -->
+<a href="https://wa.me/51999999999?text=Hola%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20Kallpa%20Greenz" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp Kallpa Greenz">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+
+<!-- ════════ JS ════════ -->
+<script>
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* Mobile menu */
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  mobileClose.addEventListener('click', closeMobile);
+
+  /* Marketplace tabs */
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+    // Re-trigger fade-ups in newly shown panel
+    document.querySelectorAll('#tab-' + name + ' .fade-up').forEach(el => {
+      el.classList.remove('visible');
+      fadeObserver.observe(el);
+    });
+  }
+
+  /* Animated counters */
+  function animateCounter(el) {
+    const target   = parseInt(el.dataset.target, 10);
+    const prefix   = el.dataset.prefix  || '';
+    const suffix   = el.dataset.suffix  || '';
+    const duration = 1800;
+    const start    = performance.now();
+    function update(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased    = 1 - Math.pow(2, -10 * progress);
+      el.textContent = prefix + Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+  let countersStarted = false;
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      if (!countersStarted) {
+        countersStarted = true;
+        document.querySelectorAll('.metric-value[data-target]').forEach(animateCounter);
+      }
+    }, 400);
+  });
+
+  /* Intersection Observer */
+  const ioOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = entry.target.parentElement
+          ? [...entry.target.parentElement.querySelectorAll('.fade-up')]
+          : [];
+        const idx = siblings.indexOf(entry.target);
+        entry.target.style.transitionDelay = (idx * 70) + 'ms';
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, ioOptions);
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  /* Pre-fill contact form */
+  function setConsulta(producto) {
+    const tipoSelect = document.getElementById('tipoConsulta');
+    const mensajeTA  = document.getElementById('mensaje');
+    if (tipoSelect) tipoSelect.value = 'invernadero';
+    if (mensajeTA && !mensajeTA.value) {
+      mensajeTA.value = `Me interesa conocer más sobre: ${producto}.`;
+    }
+  }
+
+  /* Form validation */
+  const form      = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successEl = document.getElementById('successMsg');
+
+  function validateField(id, errorId, testFn) {
+    const input = document.getElementById(id);
+    const err   = document.getElementById(errorId);
+    const valid = testFn(input.value.trim());
+    input.classList.toggle('error', !valid);
+    err.classList.toggle('visible', !valid);
+    return valid;
+  }
+  document.getElementById('nombre').addEventListener('input', () =>
+    validateField('nombre', 'nombreError', v => v.length >= 2));
+  document.getElementById('whatsapp').addEventListener('input', () =>
+    validateField('whatsapp', 'whatsappError', v => v.length >= 7));
+  document.getElementById('email').addEventListener('input', () =>
+    validateField('email', 'emailError', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const ok1 = validateField('nombre',   'nombreError',   v => v.length >= 2);
+    const ok2 = validateField('whatsapp', 'whatsappError', v => v.length >= 7);
+    const ok3 = validateField('email',    'emailError',    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+    if (!ok1 || !ok2 || !ok3) return;
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    setTimeout(() => {
+      form.style.display = 'none';
+      successEl.classList.add('visible');
+      submitBtn.classList.remove('loading');
+    }, 1600);
+  });
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+        closeMobile();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

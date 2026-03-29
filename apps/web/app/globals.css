@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { @apply font-sans text-brand-dark bg-white leading-relaxed overflow-x-hidden; }
+  img { @apply max-w-full block; }
+  a { @apply no-underline text-inherit; }
+  ul { @apply list-none; }
+}
+
+@layer utilities {
+  .container-brand { @apply max-w-[1200px] mx-auto px-6; }
+  .section { @apply py-[100px]; }
+  .section-sm { @apply py-16; }
+  .bg-hero-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(131,195,70,0.12) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+}
