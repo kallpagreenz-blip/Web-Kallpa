@@ -1,0 +1,238 @@
+export type CategoriaCatalogo = 'macrotunel' | 'multitunel' | 'especial' | 'hidroponia'
+
+export interface Invernadero {
+  id: string
+  nombre: string
+  subtitulo: string
+  categoria: CategoriaCatalogo
+  badge: string
+  badgeColor: string
+  imagen: string
+  tags: string[]
+  beneficios: string[]
+  idealPara: string
+  compatibilidad: string
+  inversion: string
+}
+
+const BASE = '/images/invernaderos'
+
+export const INVERNADEROS: Invernadero[] = [
+  {
+    id: 'macrotunel-basic',
+    nombre: 'Macrotúnel BASIC',
+    subtitulo: 'La solución más elemental',
+    categoria: 'macrotunel',
+    badge: 'Entrada',
+    badgeColor: 'bg-gray-100 text-gray-600',
+    imagen: `${BASE}/MACROTUNEL-BASIC-e1729090151207.jpg.webp`,
+    tags: ['Ancho 6–9 m', 'Largo variable', 'H. 1.5–3 m'],
+    beneficios: [
+      'Estructura acero laminado DX 51-D galvanizado',
+      'Revestimiento zinc 275 g/m² en ambas caras',
+      'Componentes: patas, arcos, estacas y puntales',
+      'Totalmente desmontable — fácil reubicación',
+      'Compatible con cultivo hidropónico',
+      'Ideal para berries y árboles frutales',
+    ],
+    idealPara: 'Pequeños productores que inician en agricultura protegida, berries y frutales.',
+    compatibilidad: 'Sistema hidropónico PATA-CLIC',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'macrotunel-forte',
+    nombre: 'Macrotúnel FORTE',
+    subtitulo: 'Eficiencia y versatilidad',
+    categoria: 'macrotunel',
+    badge: 'Popular',
+    badgeColor: 'bg-brand-accent text-brand-dark',
+    imagen: `${BASE}/MACROTUNEL-FORTE-e1729160406795.jpg.webp`,
+    tags: ['Ancho 6–9 m', 'H. 1.5–3 m', 'DX 51-D'],
+    beneficios: [
+      'Estructura reforzada para mayor resistencia al viento',
+      'Mayor estabilidad ante climatología adversa',
+      'Zinc 275 g/m² en ambas caras',
+      'Totalmente desmontable y reubicable',
+      'Compatible con sistema hidropónico',
+      'Especial para producción de berries a gran escala',
+    ],
+    idealPara: 'Productores de berries a mediana y gran escala que requieren estabilidad estructural.',
+    compatibilidad: 'Sistema hidropónico PATA-CLIC',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'macrotunel-plus',
+    nombre: 'Macrotúnel PLUS',
+    subtitulo: 'La mejor relación calidad-precio',
+    categoria: 'macrotunel',
+    badge: 'Recomendado',
+    badgeColor: 'bg-brand-mid text-white',
+    imagen: `${BASE}/MACROTUNEL-PLUS-e1729161471686.jpg.webp`,
+    tags: ['Ancho 6–9 m', 'H. 1.5–3 m', 'Gama media'],
+    beneficios: [
+      'Malla mosquitera fija + plástico tricapa 800 galgas',
+      'Cruces de San Andrés y correa de arriostamiento',
+      'Canales de evacuación y ventilaciones integradas',
+      'Tubo arco ø35/40/50 × 1.50 mm; pata × 2.00 mm',
+      'Ideal para cultivo de pitaya según productores',
+      'Compatible con sistema hidropónico PATA-CLIC',
+    ],
+    idealPara: 'Productores que buscan equilibrio entre inversión y rendimiento. Óptimo para pitaya.',
+    compatibilidad: 'Sistema hidropónico PATA-CLIC · Automatización',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'macrotunel-premium',
+    nombre: 'Macrotúnel PREMIUM',
+    subtitulo: 'La excelencia en macrotúnel',
+    categoria: 'macrotunel',
+    badge: 'Premium',
+    badgeColor: 'bg-brand-dark text-brand-accent',
+    imagen: `${BASE}/MACROTUNEL-PREMIUM-Vista-3d.jpg.webp`,
+    tags: ['Ancho 7–9 m', 'H. 0.75–1.5 m', 'Gama alta'],
+    beneficios: [
+      'Malla mosquitera + plástico tricapa 800 galgas',
+      'Refuerzos: cruces San Andrés, arriostamiento, correas frontales',
+      'Tubo arco ø40-50 × 1.50 mm; pata ø40-50 × 2.00 mm',
+      'Reducción 30% agua y 50% fertilizantes vs. cultivo tradicional',
+      '30% más plantas por hectárea — mayor rentabilidad',
+      'Compatible con hidroponía, frutos de mejor calidad',
+    ],
+    idealPara: 'Operaciones de alta rentabilidad que requieren máxima calidad estructural y productiva.',
+    compatibilidad: 'Hidroponía PATA-CLIC · Automatización · Monitoreo digital',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'macrotunel-gotico',
+    nombre: 'Macrotúnel GÓTICO',
+    subtitulo: 'Mayor volumen, condensación casi nula',
+    categoria: 'macrotunel',
+    badge: 'Gótico',
+    badgeColor: 'bg-purple-100 text-purple-700',
+    imagen: `${BASE}/MACROTUNEL-GOTICO-Vista-3d-e1729161815833.jpg.webp`,
+    tags: ['Ancho 7–9 m', 'H. 0.75–1.5 m', 'Gama media'],
+    beneficios: [
+      'Arco gótico: mayor volumen de aire interior',
+      'Inclinación pronunciada — condensación casi nula',
+      'Malla mosquitera + tricapa 800 galgas en laterales',
+      'Refuerzos San Andrés, arriostamiento y canales',
+      'Tubo arco ø40 × 1.50 mm; pata ø40 × 2.00 mm',
+      'Compatible con cultivo hidropónico',
+    ],
+    idealPara: 'Cultivos sensibles a la condensación. Excelente gestión de temperatura y humedad.',
+    compatibilidad: 'Sistema hidropónico PATA-CLIC',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'multitunel-estandar',
+    nombre: 'Multitúnel ESTÁNDAR',
+    subtitulo: 'El resultado de décadas de experiencia',
+    categoria: 'multitunel',
+    badge: 'Modular',
+    badgeColor: 'bg-blue-100 text-blue-700',
+    imagen: `${BASE}/MULTITUNEL-3D-e1729161986482.jpg.webp`,
+    tags: ['Ancho 6–10 m', 'Canal 3–5 m', 'DX 51-D'],
+    beneficios: [
+      'Invernadero modular totalmente estanco — solo tornillería',
+      'Ventilación lateral, frontal y cenital (manual o automática)',
+      'Para hortalizas, ornamentales, viveros y semilleros',
+      'Opcional: pantalla térmica, nebulización, cooling, calefacción',
+      'Puertas correderas, superficie variable',
+      'Diseñado para sistemas automatizados de precisión',
+    ],
+    idealPara: 'Producción intensiva de hortalizas, flores y proyectos de escala comercial.',
+    compatibilidad: 'Automatización completa · Hidroponía · Monitoreo digital',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'multitunel-gotico',
+    nombre: 'Multitúnel GÓTICO',
+    subtitulo: 'Mayor volumen interior, temperatura ideal',
+    categoria: 'multitunel',
+    badge: 'Multitúnel',
+    badgeColor: 'bg-blue-100 text-blue-700',
+    imagen: `${BASE}/PLANO-3D-GOTICO-PARA-WEB-Modelo-2048x1447.jpg.webp`,
+    tags: ['Ancho 6–10 m', 'Clima óptimo'],
+    beneficios: [
+      'Arco gótico que incrementa volumen de aire interior',
+      'Temperatura y humedad más uniforme',
+      'Ventilaciones cenitales de 1/4 arcos simples o dobles',
+      'Totalmente compatible con equipos del multitúnel estándar',
+      'Acero galvanizado DX 51-D, alta durabilidad',
+    ],
+    idealPara: 'Cultivos que requieren clima controlado con baja variación de temperatura y humedad.',
+    compatibilidad: 'Automatización · Monitoreo digital · Hidroponía',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'multitunel-almacen',
+    nombre: 'Multitúnel ALMACÉN',
+    subtitulo: 'Un sinfín de posibilidades',
+    categoria: 'multitunel',
+    badge: 'Almacén',
+    badgeColor: 'bg-orange-100 text-orange-700',
+    imagen: `${BASE}/PLANO-ALMACEN-PARA-WEB-2048x1447.jpg.webp`,
+    tags: ['Máx. robustez', 'Gran anchura'],
+    beneficios: [
+      'La variante más robusta y consistente de toda la gama',
+      'Mayor anchura y mayor altura disponibles',
+      'Cubierta: policarbonato o panel sándwich',
+      'Uso dual: cultivo + almacenamiento',
+      'Ideal para agroindustria y logística de campo',
+    ],
+    idealPara: 'Agroindustria y proyectos que combinan producción, logística y almacenamiento.',
+    compatibilidad: 'Automatización · Logística agrícola',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'pataclic',
+    nombre: 'Sistema PATA-CLIC',
+    subtitulo: 'Agricultura sostenible patentada',
+    categoria: 'hidroponia',
+    badge: 'Hidroponía',
+    badgeColor: 'bg-brand-light/30 text-brand-green',
+    imagen: `${BASE}/MACROTUNEL-PLUS-e1729161471686.jpg.webp`,
+    tags: ['Patente N° 200602450/7', '-90% agua'],
+    beneficios: [
+      '3 variantes: PATACLIC, en V (doble canal) y en W (capacidad ×2)',
+      'Pata auto-roscante + canaleta galvanizada sin tornillería',
+      'Saco de cultivo de fibra de coco incluido',
+      'Acorta ciclos de cultivo — mayor rendimiento',
+      'Requiere menos superficie para la misma producción',
+      'Fertirriego preciso integrado al sistema',
+    ],
+    idealPara: 'Productores que buscan maximizar rendimiento por m² con mínimo consumo hídrico.',
+    compatibilidad: 'Compatible con todos los modelos de macrotúnel y multitúnel',
+    inversion: 'Cotizar',
+  },
+  {
+    id: 'garden-umbráculo',
+    nombre: 'Modelos Especiales',
+    subtitulo: 'Garden y Umbráculo — soluciones a medida',
+    categoria: 'especial',
+    badge: 'Especial',
+    badgeColor: 'bg-brand-green/20 text-brand-green',
+    imagen: `${BASE}/GARDEN-A-DOS-AGUAS-PARA-WEB-2048x1447.jpg.webp`,
+    tags: ['Diseño personalizado', 'A medida'],
+    beneficios: [
+      'Garden dos aguas: diseño arquitectónico para espacios educativos y exhibición',
+      'Umbráculo: estructura de sombreo para cultivos que requieren luz filtrada',
+      'Adaptables a cualquier terreno y requerimiento productivo',
+      'Posibilidad de integrar sistemas hidropónicos y de monitoreo',
+      'Alta durabilidad y bajo mantenimiento',
+    ],
+    idealPara: 'Instituciones educativas, exhibición agrícola, cultivos de sombra y proyectos especiales.',
+    compatibilidad: 'Hidroponía · Monitoreo digital · Sistemas educativos STEAM',
+    inversion: 'Cotizar',
+  },
+]
+
+export const FILTROS_CATALOGO = [
+  { label: 'Todos',          value: 'todos' as const },
+  { label: 'Macrotúneles',   value: 'macrotunel' as const },
+  { label: 'Multitúneles',   value: 'multitunel' as const },
+  { label: 'Modelos especiales', value: 'especial' as const },
+  { label: 'Hidroponía',     value: 'hidroponia' as const },
+] as const
+
+export type FiltroValue = 'todos' | CategoriaCatalogo
