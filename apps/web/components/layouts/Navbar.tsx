@@ -47,17 +47,21 @@ export default function Navbar() {
       <div className="container-brand flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo-kallpa.jpeg"
-            alt="Kallpa Greenz"
-            width={140}
-            height={48}
+          <div
             className={cn(
-              'h-10 w-auto object-contain transition-all duration-300',
-              !isScrolled && 'brightness-0 invert',
+              'transition-all duration-300 rounded-xl px-2 py-1',
+              !isScrolled && 'bg-white/95 shadow-sm shadow-black/20',
             )}
-            priority
-          />
+          >
+            <Image
+              src="/images/logo-kallpa.jpeg"
+              alt="Kallpa Greenz"
+              width={100}
+              height={68}
+              className="h-11 w-auto object-contain"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop navigation */}

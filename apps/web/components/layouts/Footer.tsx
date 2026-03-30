@@ -28,13 +28,15 @@ export default function Footer() {
           {/* Column 1: Logo + tagline + socials */}
           <div className="flex flex-col gap-5">
             <Link href="/" className="flex items-center w-fit">
-              <Image
-                src="/images/logo-kallpa.jpeg"
-                alt="Kallpa Greenz"
-                width={140}
-                height={48}
-                className="h-10 w-auto object-contain brightness-0 invert"
-              />
+              <div className="bg-white/95 rounded-xl px-2 py-1">
+                <Image
+                  src="/images/logo-kallpa.jpeg"
+                  alt="Kallpa Greenz"
+                  width={100}
+                  height={68}
+                  className="h-11 w-auto object-contain"
+                />
+              </div>
             </Link>
 
             <p className="text-brand-light/60 text-sm leading-relaxed max-w-[260px]">
