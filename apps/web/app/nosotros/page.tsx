@@ -7,12 +7,12 @@ import {
   Lightbulb,
   Shield,
   Users,
-  User,
 } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
-import { TIMELINE, TEAM } from '@/data/company.data'
-import type { TimelineItem, TeamMember } from '@/types'
+import EquipoFoundersSection from '@/components/features/nosotros/EquipoFoundersSection'
+import { TIMELINE } from '@/data/company.data'
+import type { TimelineItem } from '@/types'
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -160,34 +160,7 @@ export default function NosotrosPage(): React.JSX.Element {
       </section>
 
       {/* Team */}
-      <section className="bg-white py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeUp} className="text-center mb-12">
-            <SectionLabel>Equipo</SectionLabel>
-            <h2 className="text-3xl font-bold text-brand-dark mt-4">
-              Los Fundadores
-            </h2>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {TEAM.map((member: TeamMember) => (
-              <motion.div
-                key={member.id}
-                {...fadeUp}
-                className="rounded-2xl bg-brand-bg p-6 border border-brand-border"
-              >
-                <div className="w-16 h-16 rounded-full bg-brand-mid/20 flex items-center justify-center mb-4">
-                  <User className="text-brand-mid" size={28} />
-                </div>
-                <p className="font-bold text-brand-dark">{member.name}</p>
-                <p className="text-brand-mid text-sm mt-0.5">{member.role}</p>
-                <p className="text-brand-body text-sm mt-2 leading-relaxed">
-                  {member.bio}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <EquipoFoundersSection />
 
       {/* Recognition */}
       <section className="bg-brand-dark py-16 text-center px-6">

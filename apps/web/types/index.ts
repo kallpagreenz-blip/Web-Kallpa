@@ -38,8 +38,12 @@ export interface TeamMember {
   id: string
   name: string
   role: string
+  tagline: string
   bio: string
-  photoUrl?: string
+  expandedBio: string
+  badges: readonly string[]
+  linkedin: string
+  photoUrl: string
 }
 
 // ── Products ───────────────────────────────────────────
