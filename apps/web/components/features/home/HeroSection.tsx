@@ -105,6 +105,25 @@ export default function HeroSection(): React.JSX.Element {
               <span className="text-white/30">|</span>
               <span className="flex items-center gap-1.5">🌱 Empresa Social Agrícola</span>
             </motion.div>
+
+            {/* Data chips — contexto del agro */}
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-wrap gap-2 mt-4"
+            >
+              {([
+                '91% sin acceso a crédito',
+                '84% sin riego tecnificado',
+                '96% sin asistencia técnica',
+              ] as const).map((chip) => (
+                <span
+                  key={chip}
+                  className="text-xs font-semibold text-amber-300/80 bg-amber-300/10 border border-amber-300/15 px-3 py-1.5 rounded-full"
+                >
+                  ⚠ {chip}
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Right column — decorative cards */}

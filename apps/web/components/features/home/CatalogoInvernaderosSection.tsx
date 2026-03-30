@@ -126,9 +126,13 @@ export default function CatalogoInvernaderosSection(): React.JSX.Element {
           <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mt-4 mb-3 leading-tight">
             Infraestructura agrícola para escalar.
           </h2>
-          <p className="text-brand-body max-w-2xl mx-auto text-lg">
+          <p className="text-brand-body max-w-2xl mx-auto text-lg mb-6">
             Diseñamos infraestructura agrícola adaptable para pequeños productores,
             proyectos productivos, instituciones y operaciones de mayor escala.
+          </p>
+          <p className="text-brand-mid text-sm font-medium max-w-2xl mx-auto leading-relaxed bg-brand-mid/8 border border-brand-mid/20 rounded-xl px-5 py-3">
+            Cuando solo el 16.4% de la superficie agrícola cuenta con riego tecnificado,
+            la agricultura protegida deja de ser opcional: se convierte en infraestructura estratégica.
           </p>
         </motion.div>
 

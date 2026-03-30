@@ -16,6 +16,7 @@ interface Step {
   description: string
   bullets: string[]
   result: string
+  dataRef: string
 }
 
 // ── Constants ───────────────────────────────────────────
@@ -33,6 +34,7 @@ const STEPS: Step[] = [
       'Reducción de la brecha de acceso a capital rural',
     ],
     result: 'Capital que genera capacidad productiva',
+    dataRef: '90.9% de productores no accedió a crédito · 98.7% sin seguro agropecuario',
   },
   {
     number: '02',
@@ -46,6 +48,7 @@ const STEPS: Step[] = [
       'Capacitación técnica y fortalecimiento empresarial',
     ],
     result: 'Inversión convertida en capacidad productiva real',
+    dataRef: '93.4% sin capacitación · 96.2% sin asistencia técnica · 16.4% con riego tecnificado',
   },
   {
     number: '03',
@@ -59,6 +62,7 @@ const STEPS: Step[] = [
       'Reducción de intermediarios y mejora de ingresos',
     ],
     result: 'Producción convertida en ingreso sostenible',
+    dataRef: '55.5% sin acceso al mercado regional o exterior · 49.3% en subsistencia crítica',
   },
 ]
 
@@ -108,6 +112,11 @@ function StepCard({ step, index }: StepCardProps): React.JSX.Element {
       <div className="bg-brand-mid/10 rounded-xl p-3">
         <p className="text-brand-mid font-bold text-sm">{step.result}</p>
       </div>
+
+      {/* Data context */}
+      <p className="text-[11px] text-amber-600/80 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2 leading-relaxed">
+        <span className="font-bold text-amber-700">Contexto: </span>{step.dataRef}
+      </p>
     </motion.div>
   )
 }
