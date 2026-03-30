@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Leaf, Instagram, Linkedin, Youtube, Phone, Mail, Clock } from 'lucide-react'
+import Image from 'next/image'
+import { Instagram, Linkedin, Youtube, Phone, Mail, Clock } from 'lucide-react'
 import { CONTACT_INFO } from '@/data/company.data'
 
 const NAV_FOOTER_LINKS = [
@@ -26,9 +27,14 @@ export default function Footer() {
 
           {/* Column 1: Logo + tagline + socials */}
           <div className="flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-2 w-fit">
-              <Leaf className="w-6 h-6 text-brand-light" />
-              <span className="font-bold text-xl tracking-wide text-white">KALLPA GREENZ</span>
+            <Link href="/" className="flex items-center w-fit">
+              <Image
+                src="/images/logo-kallpa.jpeg"
+                alt="Kallpa Greenz"
+                width={140}
+                height={48}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </Link>
 
             <p className="text-brand-light/60 text-sm leading-relaxed max-w-[260px]">

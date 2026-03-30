@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Leaf, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { NAV_LINKS } from '@/data/company.data'
 import type { NavLink } from '@/types'
@@ -45,21 +46,18 @@ export default function Navbar() {
     >
       <div className="container-brand flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Leaf
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo-kallpa.jpeg"
+            alt="Kallpa Greenz"
+            width={140}
+            height={48}
             className={cn(
-              'w-6 h-6 transition-all duration-300',
-              isScrolled ? 'text-brand-green' : 'text-white',
+              'h-10 w-auto object-contain transition-all duration-300',
+              !isScrolled && 'brightness-0 invert',
             )}
+            priority
           />
-          <span
-            className={cn(
-              'font-bold text-xl tracking-wide transition-all duration-300',
-              isScrolled ? 'text-brand-dark' : 'text-white',
-            )}
-          >
-            KALLPA
-          </span>
         </Link>
 
         {/* Desktop navigation */}
