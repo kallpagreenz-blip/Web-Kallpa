@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, TreePine, TrendingUp, MapPin } from 'lucide-react'
+import { GraduationCap, TreePine, TrendingUp } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import PresenciaNacionalSection from '@/components/features/impacto/PresenciaNacionalSection'
 import { METRICS } from '@/data/company.data'
 
 const motionProps = {
@@ -42,30 +43,6 @@ function ImpactCategory({ icon, title, description, stats }: ImpactCategoryProps
   )
 }
 
-interface RegionCardProps {
-  region: string
-  activity: string
-}
-
-function RegionCard({ region, activity }: RegionCardProps): React.JSX.Element {
-  return (
-    <div className="bg-white rounded-2xl p-6 border border-brand-border flex items-start gap-3">
-      <MapPin className="w-5 h-5 text-brand-mid flex-shrink-0 mt-0.5" />
-      <div>
-        <p className="font-bold text-brand-dark">{region}</p>
-        <p className="text-sm text-brand-body mt-1">{activity}</p>
-      </div>
-    </div>
-  )
-}
-
-const REGIONS: Array<{ region: string; activity: string }> = [
-  { region: 'Lima', activity: 'Domos en Santa Anita y Comas, sede central' },
-  { region: 'Áncash', activity: 'REIGEL en Caraz – modernización agrícola' },
-  { region: 'Junín', activity: 'Talleres STEAM y comunidades educativas' },
-  { region: 'Cusco', activity: 'Proyectos de educación ambiental' },
-  { region: 'Arequipa', activity: 'Expansión de programas verdes' },
-]
 
 export default function ImpactoPage(): React.JSX.Element {
   return (
@@ -157,20 +134,8 @@ export default function ImpactoPage(): React.JSX.Element {
         </div>
       </section>
 
-      {/* Peru Regions */}
-      <section className="bg-brand-bg py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <motion.div {...motionProps} className="text-center mb-10">
-            <h2 className="text-brand-dark font-bold text-3xl">Presencia Nacional</h2>
-            <p className="text-brand-body mt-2">Activos en 5 regiones del Perú</p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {REGIONS.map((item) => (
-              <RegionCard key={item.region} region={item.region} activity={item.activity} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Presencia Nacional — Interactive */}
+      <PresenciaNacionalSection />
 
       {/* Achievements */}
       <section className="bg-white py-16 px-4">

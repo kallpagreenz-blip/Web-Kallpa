@@ -1,6 +1,6 @@
 import HeroSection from '@/components/features/home/HeroSection'
 import BrechaAgroSection from '@/components/features/home/BrechaAgroSection'
-import ModeloKallpaSection from '@/components/features/home/ModeloKallpaSection'
+import SolucionesKallpaSection from '@/components/features/home/SolucionesKallpaSection'
 import CatalogoInvernaderosSection from '@/components/features/home/CatalogoInvernaderosSection'
 import ImpactIntegratedSection from '@/components/features/home/ImpactIntegratedSection'
 import ProjectLinesSection from '@/components/features/home/ProjectLinesSection'
@@ -18,7 +18,7 @@ export default function HomePage(): React.JSX.Element {
     <main>
       <HeroSection />
       <BrechaAgroSection />
-      <ModeloKallpaSection />
+      <SolucionesKallpaSection />
       <CatalogoInvernaderosSection />
       <ImpactIntegratedSection />
       <ProjectLinesSection />

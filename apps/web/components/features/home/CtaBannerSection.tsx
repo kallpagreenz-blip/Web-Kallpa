@@ -21,13 +21,13 @@ export default function CtaBannerSection(): React.JSX.Element {
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 mb-10">
-          <Button variant="accent" href="/soluciones">
+          <Button variant="accent" href="/#catalogo">
             Ver catálogo de invernaderos
           </Button>
           <Button variant="outline" href="/contacto?tipo=propuesta">
             Solicitar propuesta agrícola
           </Button>
-          <Button variant="outline" href="/#modelo">
+          <Button variant="outline" href="/#soluciones">
             Explorar nuestro modelo
           </Button>
           <Button variant="outline" href="/contacto?tipo=conversacion">

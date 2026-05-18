@@ -87,10 +87,10 @@ export default function HeroSection(): React.JSX.Element {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-10">
-              <Button variant="accent" href="/soluciones" size="lg">
+              <Button variant="accent" href="/#catalogo" size="lg">
                 Ver catálogo de invernaderos →
               </Button>
-              <Button variant="outline" href="/#modelo" size="lg">
+              <Button variant="outline" href="/#soluciones" size="lg">
                 Cómo funciona Kallpa
               </Button>
             </motion.div>
