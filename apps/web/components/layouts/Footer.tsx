@@ -5,10 +5,10 @@ import { CONTACT_INFO } from '@/data/company.data'
 
 const NAV_FOOTER_LINKS = [
   { label: 'Inicio', href: '/' },
-  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Agrofranquicias', href: '/agrofranquicias' },
   { label: 'Soluciones', href: '/soluciones' },
   { label: 'Impacto', href: '/impacto' },
-  { label: 'Galería', href: '/galeria' },
+  { label: 'Consultores', href: '/consultores' },
   { label: 'Quiénes Somos', href: '/nosotros' },
 ] as const
 

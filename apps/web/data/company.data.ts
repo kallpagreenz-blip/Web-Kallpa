@@ -140,30 +140,10 @@ export const TEAM: TeamMember[] = [
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Inicio', href: '/' },
-  {
-    label: 'Proyectos',
-    href: '/proyectos',
-    children: [
-      {
-        label: 'Domos para Educar',
-        href: '/proyectos/domos',
-        description: 'Educación STEAM en espacios vivos',
-      },
-      {
-        label: 'NAOS',
-        href: '/proyectos/naos',
-        description: 'Fotobiorreactores y captura de CO₂',
-      },
-      {
-        label: 'REIGEL',
-        href: '/proyectos/reigel',
-        description: 'Modernización agrícola inteligente',
-      },
-    ],
-  },
+  { label: 'Agrofranquicias', href: '/agrofranquicias' },
   { label: 'Soluciones', href: '/soluciones' },
   { label: 'Impacto', href: '/impacto' },
-  { label: 'Galería', href: '/galeria' },
+  { label: 'Consultores', href: '/consultores' },
   { label: 'Quiénes Somos', href: '/nosotros' },
 ]
 

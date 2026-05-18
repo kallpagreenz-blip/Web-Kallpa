@@ -168,7 +168,7 @@ export default function ProyectoModal({
                 <p className="text-brand-body leading-relaxed">{proyecto.fullDescription}</p>
 
                 <div>
-                  <h3 className="text-brand-dark font-bold mb-3">Qué se hizo</h3>
+                  <h3 className="text-brand-dark font-bold mb-3">Qué incluye esta agrofranquicia</h3>
                   <ul className="space-y-2">
                     {proyecto.queSeHizo.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-brand-body text-sm">

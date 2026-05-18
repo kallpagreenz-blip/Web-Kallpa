@@ -82,7 +82,7 @@ function RegionPanel({
             </div>
 
             <p className="text-xs font-bold uppercase tracking-widest text-brand-mid">
-              {region.proyectos.length} proyecto{region.proyectos.length !== 1 ? 's' : ''} en esta región
+              {region.proyectos.length} agrofranquicia{region.proyectos.length !== 1 ? 's' : ''} en esta región
             </p>
 
             <div className="flex flex-col gap-3">
@@ -102,7 +102,7 @@ function RegionPanel({
               <MapPinOff className="w-5 h-5 text-brand-body/50 shrink-0 mt-0.5" />
               <div>
                 <h3 className="text-brand-dark font-bold text-xl">{region.nombre}</h3>
-                <p className="text-brand-body/60 text-sm mt-0.5">Sin proyectos activos aún</p>
+                <p className="text-brand-body/60 text-sm mt-0.5">Sin agrofranquicias activas aún</p>
               </div>
             </div>
 
@@ -112,11 +112,11 @@ function RegionPanel({
               </div>
               <div>
                 <p className="text-brand-dark font-semibold text-sm">
-                  Aún no operamos en {region.nombre}
+                  Aún sin agrofranquicia en {region.nombre}
                 </p>
                 <p className="text-brand-body text-xs mt-1.5 leading-relaxed max-w-xs mx-auto">
-                  El sistema Kallpa está en expansión territorial activa. Esta región forma parte
-                  de nuestra hoja de ruta de crecimiento hacia los próximos 12 meses.
+                  La red de agrofranquicias Kallpa está en expansión activa. Esta región forma
+                  parte de nuestra hoja de ruta de crecimiento hacia los próximos 12 meses.
                 </p>
               </div>
               <div className="flex items-center gap-2 text-xs text-brand-body/50">
@@ -128,7 +128,7 @@ function RegionPanel({
             {/* Show active regions as suggestions */}
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-brand-mid mb-3">
-                Regiones con proyectos activos
+                Regiones con agrofranquicias activas
               </p>
               <div className="flex flex-wrap gap-2">
                 {REGIONES.filter((r) => r.hasProjects).map((r) => (
@@ -170,13 +170,14 @@ export default function PresenciaNacionalSection(): React.JSX.Element {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <SectionLabel>Presencia Nacional</SectionLabel>
+          <SectionLabel>Red de Agrofranquicias</SectionLabel>
           <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mt-4 mb-3">
-            Donde el sistema Kallpa toma forma
+            Donde crecen las Agrofranquicias Kallpa
           </h2>
           <p className="text-brand-body max-w-2xl text-base">
-            Activos en 5 regiones del Perú con proyectos, pilotos y despliegues reales.
-            Selecciona cualquier departamento para explorar el territorio.
+            6 agrofranquicias activas en 4 regiones del Perú. Cada una con su propio productor,
+            su propia marca y el respaldo completo del sistema Kallpa.
+            Selecciona cualquier departamento para explorar.
           </p>
         </motion.div>
 
@@ -245,7 +246,7 @@ export default function PresenciaNacionalSection(): React.JSX.Element {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 text-center text-brand-body/50 text-sm italic"
         >
-          Cada región cuenta una parte de nuestra historia en el territorio.
+          Cada agrofranquicia tiene su propio productor, su propia historia y el respaldo del sistema Kallpa.
         </motion.p>
 
       </div>

@@ -10,8 +10,10 @@ import {
 } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed'
 import EquipoFoundersSection from '@/components/features/nosotros/EquipoFoundersSection'
 import { TIMELINE } from '@/data/company.data'
+import { VIDEOS } from '@/data/videos.data'
 import type { TimelineItem } from '@/types'
 
 const fadeUp = {
@@ -80,7 +82,7 @@ export default function NosotrosPage(): React.JSX.Element {
           <motion.div {...fadeUp} className="text-center mb-12">
             <SectionLabel>Valores</SectionLabel>
             <h2 className="text-3xl font-bold text-brand-dark mt-4">
-              Nuestros Valores
+              Lo que nos mueve
             </h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -117,8 +119,65 @@ export default function NosotrosPage(): React.JSX.Element {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Kallpa en movimiento — Videos */}
       <section className="bg-brand-bg py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div {...fadeUp} className="mb-12">
+            <SectionLabel>Kallpa en movimiento</SectionLabel>
+            <h2 className="text-3xl font-bold text-brand-dark mt-4 mb-3">
+              Nuestra historia, en sus propias palabras
+            </h2>
+            <p className="text-brand-body max-w-2xl">
+              Más allá del texto y los números: estas son las imágenes, las voces y los espacios que dan vida a lo que hacemos.
+            </p>
+          </motion.div>
+
+          {/* Featured video */}
+          <motion.div {...fadeUp} className="mb-8">
+            <div className="grid md:grid-cols-[2fr_1fr] gap-8 items-start">
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <YouTubeEmbed
+                  videoId={VIDEOS[2].youtubeId}
+                  title={VIDEOS[2].title}
+                />
+              </div>
+              <div className="flex flex-col justify-center gap-3 py-4">
+                <span className="text-brand-mid text-xs font-bold uppercase tracking-widest">Destacado</span>
+                <h3 className="text-brand-dark font-bold text-xl leading-snug">
+                  {VIDEOS[2].title}
+                </h3>
+                <p className="text-brand-body text-sm leading-relaxed">
+                  {VIDEOS[2].description}
+                </p>
+                <span className="text-xs text-brand-body/50 font-medium">{VIDEOS[2].project}</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Secondary videos */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {VIDEOS.slice(0, 2).map((video) => (
+              <motion.div
+                key={video.id}
+                {...fadeUp}
+                className="flex flex-col gap-3"
+              >
+                <div className="rounded-2xl overflow-hidden shadow-sm">
+                  <YouTubeEmbed videoId={video.youtubeId} title={video.title} />
+                </div>
+                <div>
+                  <p className="font-bold text-brand-dark text-sm">{video.title}</p>
+                  <p className="text-brand-body text-xs mt-1 leading-relaxed">{video.description}</p>
+                  <span className="text-xs text-brand-body/50 mt-1 inline-block">{video.project}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="bg-white py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div {...fadeUp} className="text-center mb-12">
             <SectionLabel>Historia</SectionLabel>
@@ -127,7 +186,7 @@ export default function NosotrosPage(): React.JSX.Element {
             </h2>
             <p className="text-brand-body mt-3 leading-relaxed">
               De un proyecto de voluntariado ambiental en Lima, a una empresa
-              social con presencia en 5 regiones del Perú y visión de escala
+              social con presencia en 4 regiones del Perú y visión de escala
               latinoamericana.
             </p>
           </motion.div>

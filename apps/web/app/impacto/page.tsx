@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, TreePine, TrendingUp } from 'lucide-react'
+import { GraduationCap, TreePine, TrendingUp, Award, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import SectionLabel from '@/components/ui/SectionLabel'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
-import PresenciaNacionalSection from '@/components/features/impacto/PresenciaNacionalSection'
 import { METRICS } from '@/data/company.data'
 
 const motionProps = {
@@ -43,7 +43,6 @@ function ImpactCategory({ icon, title, description, stats }: ImpactCategoryProps
   )
 }
 
-
 export default function ImpactoPage(): React.JSX.Element {
   return (
     <main>
@@ -52,10 +51,10 @@ export default function ImpactoPage(): React.JSX.Element {
         <div className="max-w-3xl mx-auto flex flex-col items-center gap-6">
           <SectionLabel>Impacto Real</SectionLabel>
           <h1 className="text-white font-bold text-5xl leading-tight">
-            La sostenibilidad no se promete. Se diseña, instala y mide.
+            La sostenibilidad no se promete.<br />Se diseña, instala y mide.
           </h1>
           <p className="text-white/70 text-lg max-w-2xl">
-            Cada número que ves aquí tiene una historia detrás: una escuela, una comunidad, un campo, un niño que aprendió algo nuevo.
+            Cada número que ves aquí tiene una historia detrás: una familia productora, una comunidad, un campo que hoy produce mejor y con mayor dignidad.
           </p>
         </div>
       </section>
@@ -77,23 +76,23 @@ export default function ImpactoPage(): React.JSX.Element {
           <ImpactCategory
             icon={<TreePine className="w-6 h-6" />}
             title="Impacto Ambiental"
-            description="Nuestros sistemas reducen drásticamente el consumo de agua y capturan CO₂ de forma activa. La tecnología verde no es solo un slogan: es una métrica medible."
+            description="Nuestros sistemas reducen drásticamente el consumo de agua y generan producción limpia. La tecnología verde no es solo un slogan: es una métrica medible."
             stats={[
               { label: 'CO₂ capturado', value: '+7 ton' },
               { label: 'Ahorro de agua', value: '90%' },
-              { label: 'Regiones activas', value: '5' },
+              { label: 'Regiones activas', value: '4' },
               { label: 'Años de impacto', value: '4' },
             ]}
           />
           <ImpactCategory
             icon={<TrendingUp className="w-6 h-6" />}
             title="Impacto Productivo"
-            description="REIGEL y NAOS demuestran que la sostenibilidad y la rentabilidad van de la mano. Producción limpia, trazable y con retorno de inversión real."
+            description="Las agrofranquicias Kallpa demuestran que sostenibilidad y rentabilidad van juntas. Producción limpia, trazable y con retorno de inversión real para el productor."
             stats={[
-              { label: 'Plantas/ciclo (REIGEL)', value: '4,000' },
-              { label: 'CO₂/año (NAOS)', value: '0.5 ton' },
+              { label: 'Agrofranquicias activas', value: '6' },
               { label: 'ROI proyectado', value: '12–14 m' },
               { label: 'Ahorro de agua', value: '90%' },
+              { label: 'Regiones', value: '4' },
             ]}
           />
         </div>
@@ -125,7 +124,7 @@ export default function ImpactoPage(): React.JSX.Element {
                   className="text-5xl font-bold text-brand-accent"
                 />
                 <p className="text-white font-bold mt-2">{metric.label}</p>
-                {metric.description && (
+                {metric.description !== undefined && (
                   <p className="text-white/50 text-xs mt-1">{metric.description}</p>
                 )}
               </motion.div>
@@ -134,23 +133,50 @@ export default function ImpactoPage(): React.JSX.Element {
         </div>
       </section>
 
-      {/* Presencia Nacional — Interactive */}
-      <PresenciaNacionalSection />
+      {/* Transformación territorial */}
+      <section className="bg-brand-bg py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.div {...motionProps} className="text-center mb-12">
+            <SectionLabel>Transformación</SectionLabel>
+            <h2 className="text-brand-dark font-bold text-3xl mt-4 mb-3">
+              Lo que cambia cuando Kallpa opera en un territorio
+            </h2>
+            <p className="text-brand-body max-w-2xl mx-auto">
+              El impacto no es solo tecnológico. Es social, económico y territorial.
+            </p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icono: '🌾', titulo: 'Producción más segura', desc: 'Los productores reducen su exposición a heladas, plagas y variabilidad climática gracias a la infraestructura protegida.' },
+              { icono: '💰', titulo: 'Mejor ingreso por cosecha', desc: 'Producción de mayor calidad genera acceso a canales comerciales con mejor precio y menor intermediación.' },
+              { icono: '📊', titulo: 'Decisiones basadas en datos', desc: 'Monitoreo en tiempo real permite ajustar nutrición, riego y manejo antes de que los problemas escalen.' },
+              { icono: '🤝', titulo: 'Comunidades productivas', desc: 'La agrofranquicia fortalece el tejido productivo local y genera oportunidades de empleo y formación.' },
+              { icono: '🏷️', titulo: 'Identidad de marca', desc: 'Cada productor construye su propia marca con el respaldo del sistema Kallpa. El campo tiene nombre propio.' },
+              { icono: '🌱', titulo: 'Sostenibilidad medible', desc: 'CO₂, agua, suelo: cada parámetro se mide. La sostenibilidad no es un discurso, es una métrica verificable.' },
+            ].map((item) => (
+              <motion.div
+                key={item.titulo}
+                {...motionProps}
+                className="bg-white rounded-2xl border border-brand-border p-6 hover:border-brand-mid/30 hover:shadow-sm transition-all duration-200"
+              >
+                <span className="text-3xl block mb-3">{item.icono}</span>
+                <h3 className="text-brand-dark font-bold text-sm mb-2">{item.titulo}</h3>
+                <p className="text-brand-body text-xs leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Achievements */}
+      {/* Reconocimientos */}
       <section className="bg-white py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <motion.h2 {...motionProps} className="text-brand-dark font-bold text-3xl text-center mb-10">
-            Reconocimientos
-          </motion.h2>
+          <motion.div {...motionProps} className="flex items-center gap-3 mb-10">
+            <Award className="w-6 h-6 text-brand-mid" />
+            <h2 className="text-brand-dark font-bold text-3xl">Reconocimientos</h2>
+          </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-brand-bg rounded-3xl p-8 border border-brand-border"
-            >
+            <motion.div {...motionProps} className="bg-brand-bg rounded-3xl p-8 border border-brand-border">
               <p className="text-4xl mb-4">🏆</p>
               <p className="text-xs font-bold tracking-widest uppercase text-brand-mid mb-2">2021</p>
               <h3 className="font-bold text-xl text-brand-dark mb-3">LG Ambassador Challenge 2021</h3>
@@ -159,10 +185,8 @@ export default function ImpactoPage(): React.JSX.Element {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              {...motionProps}
+              transition={{ ...motionProps.transition, delay: 0.1 }}
               className="bg-brand-bg rounded-3xl p-8 border border-brand-border"
             >
               <p className="text-4xl mb-4">🇺🇸</p>
@@ -173,6 +197,25 @@ export default function ImpactoPage(): React.JSX.Element {
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA → Agrofranquicias */}
+      <section className="bg-brand-dark py-16 px-4 text-center">
+        <div className="max-w-2xl mx-auto flex flex-col items-center gap-5">
+          <h2 className="text-white font-bold text-2xl">
+            ¿Quieres explorar dónde opera la red Kallpa?
+          </h2>
+          <p className="text-white/60 text-sm">
+            El mapa interactivo con las agrofranquicias activas está en la sección Agrofranquicias.
+          </p>
+          <Link
+            href="/agrofranquicias"
+            className="inline-flex items-center gap-2 bg-brand-accent hover:bg-yellow-400 text-brand-dark font-bold px-7 py-3 rounded-full transition-all duration-200 hover:-translate-y-0.5"
+          >
+            Ver red de agrofranquicias
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </main>
