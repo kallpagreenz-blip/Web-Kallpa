@@ -56,148 +56,201 @@ const BRECHAS: readonly BrechaIndicador[] = [
 
 export default function BrechaAgroSection(): React.JSX.Element {
   return (
-    <section className="bg-[#0b1c0d]">
+    <section className="bg-[#070f08]">
 
-      {/* ── Upper: photo background + narrative text ──── */}
-      <div className="relative flex items-center overflow-hidden" style={{ minHeight: '72vh' }}>
+      {/* ── Upper area: full-bleed photo + text overlay ── */}
+      <div
+        className="relative flex items-center overflow-hidden"
+        style={{ minHeight: '80vh' }}
+      >
 
-        {/* Background photo */}
+        {/* Photo */}
         <Image
           src="/images/por-que-kallpa/foto-agricultor.png"
           alt=""
           fill
           className="object-cover"
-          style={{ objectPosition: '62% center' }}
-          quality={90}
+          style={{ objectPosition: '58% center' }}
+          quality={92}
           sizes="100vw"
         />
 
-        {/* Gradient: left (opaque) → right (transparent) — keeps text legible */}
+        {/* ── Gradient layers ── */}
+
+        {/* Primary: left zone — strong dark panel for text */}
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              'linear-gradient(to right, rgba(11,28,13,0.97) 0%, rgba(11,28,13,0.93) 22%, rgba(11,28,13,0.72) 44%, rgba(11,28,13,0.22) 68%, rgba(11,28,13,0.04) 90%, transparent 100%)',
+            background: [
+              'linear-gradient(to right,',
+              '  rgba(5,12,6,0.99)  0%,',
+              '  rgba(5,12,6,0.97) 15%,',
+              '  rgba(5,12,6,0.93) 28%,',
+              '  rgba(5,12,6,0.78) 42%,',
+              '  rgba(5,12,6,0.38) 60%,',
+              '  rgba(5,12,6,0.08) 78%,',
+              '  transparent       95%',
+              ')',
+            ].join(' '),
           }}
         />
 
-        {/* Gradient: top fade (navbar blend) */}
+        {/* Top blend (navbar) */}
         <div
           aria-hidden="true"
-          className="absolute top-0 left-0 right-0 h-28 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, rgba(11,28,13,0.55) 0%, transparent 100%)' }}
+          className="absolute top-0 inset-x-0 h-20 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(5,12,6,0.55) 0%, transparent 100%)' }}
         />
 
-        {/* Gradient: bottom into indicator strip */}
+        {/* Bottom blend into indicator strip */}
         <div
           aria-hidden="true"
-          className="absolute bottom-0 left-0 right-0 h-36 pointer-events-none"
-          style={{ background: 'linear-gradient(to top, rgba(7,15,8,1) 0%, transparent 100%)' }}
+          className="absolute bottom-0 inset-x-0 h-44 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(4,9,5,1) 0%, rgba(4,9,5,0.55) 55%, transparent 100%)' }}
         />
 
-        {/* Narrative text block */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-14 py-20 lg:py-28">
+        {/* ── Narrative content ── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-14 py-24 lg:py-32">
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-5 max-w-[480px]"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-6 max-w-[490px]"
           >
+
             {/* Label */}
-            <p className="flex items-center gap-2 text-brand-mid text-[11px] font-bold tracking-[0.22em] uppercase">
+            <p className="flex items-center gap-2 text-brand-mid text-[10.5px] font-bold tracking-[0.28em] uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-mid shrink-0" />
               El Contexto
             </p>
 
-            {/* Title */}
+            {/* Title — "Kallpa" in green, leaf inline after "existe" */}
             <h2
-              className="font-bold text-white leading-[1.05] tracking-tight"
-              style={{ fontSize: 'clamp(2.6rem, 5.2vw, 4.2rem)' }}
+              className="font-bold text-white leading-[1.04] tracking-tight"
+              style={{ fontSize: 'clamp(3rem, 5.8vw, 5rem)' }}
             >
               Por qué{' '}
-              <span className="text-brand-light">Kallpa</span>
+              <span style={{ color: '#83c346' }}>Kallpa</span>
               <br />
               existe{' '}
-              <span className="text-brand-mid" style={{ fontSize: '0.6em' }}>🌿</span>
+              <span
+                style={{
+                  fontSize: '0.52em',
+                  color: '#569b32',
+                  display: 'inline-block',
+                  verticalAlign: '12%',
+                  lineHeight: 1,
+                }}
+              >
+                🌿
+              </span>
             </h2>
 
-            {/* Body */}
-            <p className="text-white/62 text-[0.98rem] leading-relaxed max-w-[400px]">
+            {/* Body copy */}
+            <p
+              className="leading-[1.8]"
+              style={{ fontSize: '0.975rem', color: 'rgba(255,255,255,0.80)', maxWidth: '400px' }}
+            >
               El agro peruano no enfrenta una sola brecha.
               <br />
               Enfrenta cuatro, simultáneamente.
               <br />
-              <span className="text-white font-semibold">
+              <span style={{ color: 'rgba(255,255,255,0.96)', fontWeight: 700 }}>
                 Kallpa responde conectando inversión, tecnología,
                 acompañamiento y mercado.
               </span>
             </p>
 
             {/* Quote */}
-            <div className="mt-1 pl-0">
+            <div className="flex flex-col gap-1 mt-1">
               <span
-                className="text-brand-mid font-bold leading-none select-none"
-                style={{ fontSize: '3.2rem', fontFamily: 'Georgia, serif', lineHeight: '1' }}
+                aria-hidden="true"
+                className="select-none leading-none"
+                style={{
+                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontSize: '3.4rem',
+                  color: '#569b32',
+                  lineHeight: '0.85',
+                  display: 'block',
+                  marginBottom: '-6px',
+                }}
               >
                 "
               </span>
-              <p className="text-white/72 italic text-[0.93rem] leading-relaxed -mt-2">
+              <p
+                className="italic leading-[1.65]"
+                style={{ fontSize: '0.92rem', color: 'rgba(255,255,255,0.78)' }}
+              >
                 No nos falta esfuerzo.
                 <br />
                 Nos falta un sistema que nos acompañe.
               </p>
-              <p className="text-white/38 text-xs mt-2 font-medium tracking-wider">
+              <p
+                className="font-medium tracking-widest"
+                style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.40)', marginTop: '4px' }}
+              >
                 — Productora de Ica
               </p>
             </div>
+
           </motion.div>
         </div>
       </div>
 
-      {/* ── Bottom: 4 indicator strip ─────────────────── */}
-      <div className="bg-[#070f08] border-t border-white/[0.05]">
+      {/* ── Bottom: 4-indicator strip ─────────────────── */}
+      <div
+        className="border-t"
+        style={{ backgroundColor: '#040905', borderColor: 'rgba(255,255,255,0.06)' }}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-14">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.06]">
+          <div className="grid grid-cols-2 md:grid-cols-4 md:divide-x divide-white/[0.07]">
             {BRECHAS.map((b, i) => {
               const Icon = b.icon
               return (
                 <motion.div
                   key={b.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.07 }}
-                  className="relative px-6 py-7 flex flex-col gap-2.5"
+                  className="relative flex flex-col gap-2 px-6 pt-7 pb-6"
                   style={{ borderBottom: `2px solid ${b.color}` }}
                 >
-                  {/* Icon + title row */}
-                  <div className="flex items-center gap-2">
+                  {/* Icon + title */}
+                  <div className="flex items-start gap-2.5">
                     <div
-                      className="w-6 h-6 rounded-md flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${b.color}22` }}
+                      className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ backgroundColor: `${b.color}28` }}
                     >
-                      <Icon className="w-3 h-3" style={{ color: b.color }} />
+                      <Icon className="w-3.5 h-3.5" style={{ color: b.color }} />
                     </div>
-                    <p className="text-white/55 text-[11px] font-semibold leading-tight">
+                    <p
+                      className="font-semibold leading-snug tracking-wide"
+                      style={{ fontSize: '11px', color: 'rgba(255,255,255,0.58)' }}
+                    >
                       {b.title}
                     </p>
                   </div>
 
-                  {/* Big percentage */}
+                  {/* Percentage — dominant element */}
                   <p
                     className="font-bold leading-none"
                     style={{
-                      fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                      fontSize: 'clamp(2.4rem, 4vw, 3.4rem)',
                       color: b.color,
+                      letterSpacing: '-0.01em',
                     }}
                   >
                     {b.value}
                   </p>
 
                   {/* Description */}
-                  <p className="text-white/42 text-xs leading-relaxed">
+                  <p
+                    className="leading-relaxed"
+                    style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.46)' }}
+                  >
                     {b.desc}
                   </p>
                 </motion.div>
@@ -207,10 +260,14 @@ export default function BrechaAgroSection(): React.JSX.Element {
         </div>
 
         {/* Source footnote */}
-        <p className="text-center text-white/18 text-[10px] pb-5 pt-2">
+        <p
+          className="text-center pb-5 pt-2 px-4"
+          style={{ fontSize: '10px', color: 'rgba(255,255,255,0.22)' }}
+        >
           Fuente: INEI — Pequeñas y Medianas Unidades Agropecuarias 2021–2022, julio 2023
         </p>
       </div>
+
     </section>
   )
 }
