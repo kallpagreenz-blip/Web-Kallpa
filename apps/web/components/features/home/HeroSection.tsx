@@ -1,74 +1,173 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import { Droplets, TrendingUp, Sprout, Users } from 'lucide-react'
 import Button from '@/components/ui/Button'
-import { METRICS } from '@/data/company.data'
 
-const heroMetrics = METRICS.slice(0, 4)
+// ── Background images + object-position per photo ────────
 
-const containerVariants = {
+interface BgImage {
+  src: string
+  objectPosition: string
+}
+
+const BG_IMAGES: BgImage[] = [
+  // Farmer from behind (right third) — shift right to keep him visible
+  { src: '/images/inicio/foto-inicio-1.png', objectPosition: '72% center' },
+  // Female farmer center-left
+  { src: '/images/inicio/foto-inicio-2.png', objectPosition: '50% center' },
+  // Family group, center frame
+  { src: '/images/inicio/foto-inicio-3.png', objectPosition: '55% center' },
+  // Inside greenhouse, woman right of center
+  { src: '/images/inicio/foto-inicio-4.png', objectPosition: '65% center' },
+  // Loading truck, group center
+  { src: '/images/inicio/foto-inicio-5.png', objectPosition: '50% center' },
+  // Team portrait in front of greenhouse
+  { src: '/images/inicio/foto-inicio-6.png', objectPosition: '50% center' },
+]
+
+// ── Bottom metrics ────────────────────────────────────────
+
+const HERO_METRICS = [
+  { Icon: Droplets, valor: '90%', label: 'Ahorro de agua' },
+  { Icon: TrendingUp, valor: 'ROI', label: '12–14 meses' },
+  { Icon: Sprout, valor: '+4,000', label: 'plantas por ciclo' },
+  { Icon: Users, valor: 'Acompañamiento', label: 'técnico continuo' },
+] as const
+
+// ── Framer Motion variants ────────────────────────────────
+
+const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.11 } },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
 }
 
+// ── Component ─────────────────────────────────────────────
+
 export default function HeroSection(): React.JSX.Element {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setCurrent((c) => (c + 1) % BG_IMAGES.length),
+      6500,
+    )
+    return () => clearInterval(id)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center bg-brand-dark overflow-hidden">
-      {/* Background — tierra y campo */}
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#061208]">
+
+      {/* ── Background images — crossfade ────────────────── */}
+      {BG_IMAGES.map((img, i) => (
+        <div
+          key={img.src}
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            opacity: i === current ? 1 : 0,
+            transition: 'opacity 1.8s ease-in-out',
+            zIndex: 0,
+          }}
+        >
+          <Image
+            src={img.src}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: img.objectPosition }}
+            priority={i === 0}
+            sizes="100vw"
+            quality={90}
+          />
+        </div>
+      ))}
+
+      {/* ── Gradient overlays ────────────────────────────── */}
+
+      {/* Primary: left (opaque) → right (transparent) for text */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(135deg, #0d2010 0%, #1a3518 40%, #2a5020 70%, #1e3a18 100%)',
-        }}
-      />
-      {/* Overlay de textura sutil */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.08\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+          zIndex: 1,
+          background:
+            'linear-gradient(to right, rgba(6,18,8,0.93) 0%, rgba(6,18,8,0.83) 18%, rgba(6,18,8,0.58) 42%, rgba(6,18,8,0.18) 66%, transparent 88%)',
         }}
       />
 
-      {/* Glow ambiental */}
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-brand-green/10 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-brand-mid/10 blur-3xl rounded-full pointer-events-none" />
+      {/* Secondary: top fade (navbar contrast) */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background: 'linear-gradient(to bottom, rgba(6,18,8,0.65) 0%, transparent 100%)',
+        }}
+      />
 
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[3fr_2fr] gap-16 items-center">
+      {/* Tertiary: bottom fade (metrics contrast) */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none"
+        style={{
+          zIndex: 1,
+          background: 'linear-gradient(to top, rgba(6,18,8,0.92) 0%, rgba(6,18,8,0.35) 52%, transparent 100%)',
+        }}
+      />
 
-          {/* Left — copy principal */}
+      {/* ── Content ──────────────────────────────────────── */}
+      <div
+        className="relative flex flex-col min-h-screen max-w-7xl mx-auto w-full px-6 lg:px-12"
+        style={{ zIndex: 2 }}
+      >
+        {/* Main text — vertically centered */}
+        <div className="flex-1 flex items-center pt-24 lg:pt-32 pb-8">
           <motion.div
-            variants={containerVariants}
+            variants={stagger}
             initial="hidden"
             animate="visible"
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-5 max-w-xl"
           >
-            <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 text-brand-mid text-xs font-bold tracking-widest uppercase bg-brand-mid/20 border border-brand-mid/20 px-4 py-2 rounded-full">
-                🌿 Empresa Social · Agrofranquicias · Perú
-              </span>
-            </motion.div>
-
-            <motion.h1
+            {/* Label */}
+            <motion.p
               variants={fadeUp}
-              className="text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight"
+              className="flex items-center gap-2 text-brand-mid text-[11px] font-bold tracking-[0.2em] uppercase"
             >
-              El campo merece
-              <br />
-              <span className="text-brand-accent">tecnología real.</span>
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-white/65 text-xl max-w-xl leading-relaxed">
-              Llevamos invernaderos, riego tecnificado y acompañamiento productivo a pequeños agricultores. Para que produzcan mejor, reduzcan riesgos y vendan a mayor precio.
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-mid shrink-0 inline-block" />
+              Empresa Social · Agrofranquicias · Perú
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+            {/* Headline */}
+            <motion.h1
+              variants={fadeUp}
+              className="font-bold leading-[1.03] tracking-tight"
+              style={{ fontSize: 'clamp(2.5rem, 6.2vw, 5rem)' }}
+            >
+              <span className="text-white">Transformamos<br />el campo en<br /></span>
+              <span className="text-brand-accent">oportunidades<br />productivas<br /></span>
+              <span className="text-white">sostenibles.</span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              variants={fadeUp}
+              className="text-white/60 text-base md:text-[1.05rem] leading-relaxed max-w-[440px]"
+            >
+              Conectamos inversión, tecnología y acompañamiento
+              {' '}para que pequeños agricultores produzcan mejor,
+              {' '}reduzcan riesgos y accedan a mercados de mayor valor.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-1">
               <Button variant="accent" href="/agrofranquicias" size="lg">
                 Ver Agrofranquicias →
               </Button>
@@ -76,103 +175,59 @@ export default function HeroSection(): React.JSX.Element {
                 Hablar con el equipo
               </Button>
             </motion.div>
-
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-5 text-sm text-white/50 pt-2">
-              <span className="flex items-center gap-1.5">🏆 LG Ambassador 2021</span>
-              <span className="text-white/20">·</span>
-              <span className="flex items-center gap-1.5">🇺🇸 Embajada EE.UU. 2024–25</span>
-              <span className="text-white/20">·</span>
-              <span className="flex items-center gap-1.5">🌱 4 regiones activas</span>
-            </motion.div>
-
-            {/* Contexto del agro — chips de diagnóstico */}
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
-              {[
-                '91% sin acceso a crédito',
-                '84% sin riego tecnificado',
-                '96% sin asistencia técnica',
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="text-xs font-semibold text-amber-300/75 bg-amber-300/8 border border-amber-300/15 px-3 py-1.5 rounded-full"
-                >
-                  ⚠ {chip}
-                </span>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right — tarjetas de campo */}
-          <motion.div
-            className="hidden lg:flex flex-col gap-4"
-            initial={{ opacity: 0, x: 32 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            {/* Tarjeta principal */}
-            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-6">
-              <p className="text-brand-mid text-xs font-bold tracking-widest uppercase mb-4">
-                Sistema Kallpa · Agrofranquicia activa
-              </p>
-              <div className="flex flex-col gap-3">
-                {[
-                  { icono: '🏗️', texto: 'Invernadero instalado y operando' },
-                  { icono: '💧', texto: '90% menos agua que el riego tradicional' },
-                  { icono: '📈', texto: 'ROI proyectado: 12 a 14 meses' },
-                  { icono: '🤝', texto: 'Acompañamiento técnico continuo' },
-                  { icono: '🏷️', texto: 'Marca propia del productor' },
-                ].map(({ icono, texto }) => (
-                  <div key={texto} className="flex items-center gap-3 text-white/75 text-sm">
-                    <span>{icono}</span>
-                    <span>{texto}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tarjeta de red */}
-            <div className="bg-brand-accent/95 rounded-2xl p-5 text-brand-dark">
-              <p className="font-bold text-xs tracking-widest uppercase mb-2">Red activa</p>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { v: '6', l: 'Agrofranquicias' },
-                  { v: '4', l: 'Regiones' },
-                  { v: '+100', l: 'Voluntarios' },
-                  { v: '+2,600', l: 'Niños' },
-                ].map(({ v, l }) => (
-                  <div key={l}>
-                    <p className="font-bold text-xl">{v}</p>
-                    <p className="text-brand-dark/60 text-xs">{l}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </div>
 
-        {/* Metrics strip */}
+        {/* Metrics strip — pinned to bottom */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden"
+          transition={{ duration: 0.7, delay: 0.85 }}
+          className="pb-8 lg:pb-10"
         >
-          {heroMetrics.map((metric) => (
-            <div
-              key={metric.id}
-              className="bg-brand-dark/60 backdrop-blur-sm px-6 py-5 text-center hover:bg-brand-dark/80 transition-colors"
-            >
-              <div className="text-3xl font-bold text-brand-accent">
-                <AnimatedCounter
-                  end={metric.value}
-                  prefix={metric.prefix}
-                  suffix={metric.suffix}
-                />
-              </div>
-              <p className="text-white/55 text-sm mt-1">{metric.label}</p>
+          <div className="border-t border-white/15 pt-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-5">
+              {HERO_METRICS.map(({ Icon, valor, label }) => (
+                <div key={label} className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon size={16} className="text-white/65" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm md:text-[0.95rem] leading-tight">
+                      {valor}
+                    </p>
+                    <p className="text-white/45 text-xs mt-0.5">{label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </motion.div>
+      </div>
+
+      {/* Slide indicators — bottom center */}
+      <div
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1.5"
+        style={{ zIndex: 3 }}
+      >
+        {BG_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            aria-label={`Foto ${i + 1}`}
+            onClick={() => setCurrent(i)}
+            style={{
+              height: '3px',
+              width: i === current ? '1.5rem' : '0.45rem',
+              borderRadius: '999px',
+              backgroundColor: i === current ? 'rgba(255,255,255,0.90)' : 'rgba(255,255,255,0.22)',
+              transition: 'all 0.45s ease',
+              cursor: 'pointer',
+              border: 'none',
+              padding: 0,
+            }}
+          />
+        ))}
       </div>
     </section>
   )
